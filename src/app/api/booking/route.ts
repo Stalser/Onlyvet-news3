@@ -5,7 +5,9 @@ import { checkRateLimit, isValidEmail, sanitizeHtml } from '@/lib/security';
 const bookingRateLimits = new Map<string, { count: number; resetTime: number }>();
 
 export async function POST(request: NextRequest) {
-  const ip = request.ip || 'unknown';
+  // Получаем IP из заголовков
+  const forwarded = request.headers.get('x-forwarded-for');
+  const ip = forwarded ? forwarded.split(',')[0] : 'unknown';
   
   // Rate limiting: 5 запросов в час на один IP
   const isAllowed = checkRateLimit(bookingRateLimits, ip, 5, 60 * 60 * 1000);

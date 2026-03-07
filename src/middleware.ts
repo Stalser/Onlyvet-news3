@@ -8,7 +8,9 @@ const WINDOW_MS = 60 * 1000; // 1 минута
 const MAX_REQUESTS = 30; // макс. запросов в минуту
 
 export function middleware(request: NextRequest) {
-  const ip = request.ip || 'unknown';
+  // Получаем IP из заголовков
+  const forwarded = request.headers.get('x-forwarded-for');
+  const ip = forwarded ? forwarded.split(',')[0] : 'unknown';
   const now = Date.now();
   
   // Rate limiting
