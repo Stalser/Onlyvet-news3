@@ -42,3 +42,9 @@ next-env.d.ts
 
 # old project backup
 /old-project-backup/
+
+# Security
+.env
+.env.local
+.env*.local
+
