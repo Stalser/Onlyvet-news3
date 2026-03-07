@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="500" viewBox="0 0 400 500">
+  <defs>
+    <linearGradient id="elvinBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4A90A4"/>
+      <stop offset="100%" stop-color="#2D5F72"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="500" fill="url(#elvinBg)"/>
+  <text x="50%" y="45%" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="100" font-weight="bold" fill="white" opacity="0.25">АК</text>
+  <text x="50%" y="460" text-anchor="middle" font-family="Arial" font-size="18" font-weight="bold" fill="white">Курилов Андрей</text>
+  <text x="50%" y="480" text-anchor="middle" font-family="Arial" font-size="14" fill="white" opacity="0.8">Ветеринарный врач</text>
+</svg>
