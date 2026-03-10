@@ -18,6 +18,9 @@ const specializationLabels: Record<Specialization, string> = {
   'онкология': 'Онкологи',
 };
 
+// Фильтр только для врачей, которые есть в базе
+const availableSpecializations: Specialization[] = ['все', 'эксперт', 'терапия', 'диагностика'];
+
 export default function DoctorsPage() {
   const [selectedSpecialization, setSelectedSpecialization] = useState<Specialization>('все');
   const [searchQuery, setSearchQuery] = useState('');
@@ -135,7 +138,7 @@ export default function DoctorsPage() {
             {/* Специализации - горизонтальный скролл */}
             <div className="overflow-x-auto overflow-y-hidden -mx-1 px-1">
               <div className="flex gap-2 whitespace-nowrap pb-1">
-                {(Object.keys(specializationLabels) as Specialization[]).map((spec) => (
+                {availableSpecializations.map((spec) => (
                   <button
                     key={spec}
                     onClick={() => setSelectedSpecialization(spec)}
@@ -193,7 +196,7 @@ export default function DoctorsPage() {
 
                 {/* Специализации */}
                 <div className="flex flex-wrap gap-2">
-                  {(Object.keys(specializationLabels) as Specialization[]).map((spec) => (
+                  {availableSpecializations.map((spec) => (
                     <button
                       key={spec}
                       onClick={() => setSelectedSpecialization(spec)}
