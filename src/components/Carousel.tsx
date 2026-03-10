@@ -9,17 +9,37 @@ interface CarouselProps {
   autoPlayInterval?: number;
 }
 
-export default function Carousel({ 
-  children, 
+export default function Carousel({
+  children,
   itemsPerPage = 3,
   autoPlay = true,
-  autoPlayInterval = 5000 
+  autoPlayInterval = 5000
 }: CarouselProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
 
+  // Адаптивное количество элементов на странице
+  const [actualItemsPerPage, setActualItemsPerPage] = useState(itemsPerPage);
+
+  useEffect(() => {
+    const updateItemsPerPage = () => {
+      if (typeof window === 'undefined') return;
+      if (window.innerWidth < 768) {
+        setActualItemsPerPage(1);
+      } else if (window.innerWidth < 1024) {
+        setActualItemsPerPage(2);
+      } else {
+        setActualItemsPerPage(itemsPerPage);
+      }
+    };
+
+    updateItemsPerPage();
+    window.addEventListener('resize', updateItemsPerPage);
+    return () => window.removeEventListener('resize', updateItemsPerPage);
+  }, [itemsPerPage]);
+
   const totalItems = children.length;
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const totalPages = Math.ceil(totalItems / actualItemsPerPage);
 
   const nextSlide = useCallback(() => {
     setCurrentIndex((prev) => (prev >= totalPages - 1 ? 0 : prev + 1));
@@ -57,9 +77,9 @@ export default function Carousel({
           style={{ transform: `translateX(-${currentIndex * 100}%)` }}
         >
           {children.map((child, index) => (
-            <div 
+            <div
               key={index}
-              className="w-full md:w-1/2 lg:w-1/3 flex-shrink-0 px-4"
+              className="w-full sm:w-1/2 lg:w-1/3 flex-shrink-0 px-4"
             >
               {child}
             </div>
