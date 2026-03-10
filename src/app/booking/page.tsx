@@ -38,6 +38,9 @@ export default function BookingPage() {
   // Прикреплённые файлы
   const [files, setFiles] = useState<File[]>([]);
 
+  // Прикреплённые видео
+  const [videos, setVideos] = useState<File[]>([]);
+
   // Согласия
   const [consentPersonalData, setConsentPersonalData] = useState(false);
   const [consentOffer, setConsentOffer] = useState(false);
@@ -69,6 +72,10 @@ export default function BookingPage() {
         if (draft.complaint) setComplaint(draft.complaint);
         if (draft.selectedDoctor) setSelectedDoctor(draft.selectedDoctor);
         if (draft.selectedService) setSelectedService(draft.selectedService);
+        // Видео не сохраняем в localStorage (только метаданные)
+        if (draft.videoNames && Array.isArray(draft.videoNames)) {
+          console.log('Сохранённые видео:', draft.videoNames);
+        }
       } catch (e) {
         console.error('Ошибка загрузки черновика:', e);
       }
@@ -93,6 +100,7 @@ export default function BookingPage() {
       complaint,
       selectedDoctor,
       selectedService,
+      videoNames: videos.map(v => ({ name: v.name, size: v.size })),
     };
     localStorage.setItem('bookingDraft', JSON.stringify(draft));
   }, [
@@ -109,6 +117,7 @@ export default function BookingPage() {
     complaint,
     selectedDoctor,
     selectedService,
+    videos,
   ]);
 
   // Валидация email
@@ -169,6 +178,7 @@ export default function BookingPage() {
           selectedDoctor,
           selectedService,
           files: files.map(f => ({ name: f.name, size: f.size, type: f.type })),
+          videos: videos.map(v => ({ name: v.name, size: v.size, type: v.type })),
           consentPersonalData,
           consentOffer,
           consentRules,
@@ -209,6 +219,7 @@ export default function BookingPage() {
     setSelectedDoctor('');
     setSelectedService('');
     setFiles([]);
+    setVideos([]);
     setConsentPersonalData(false);
     setConsentOffer(false);
     setConsentRules(false);
@@ -223,7 +234,7 @@ export default function BookingPage() {
     window.open('https://t.me/onlyvet_clinic', '_blank', 'noopener,noreferrer');
   };
 
-  // Обработка загрузки файлов
+  // Обработка загрузки файлов (PDF, JPG, PNG)
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const uploadedFiles = Array.from(e.target.files || []);
     if (uploadedFiles.length === 0) return;
@@ -249,9 +260,40 @@ export default function BookingPage() {
     e.target.value = '';
   };
 
+  // Обработка загрузки видео (MP4, MOV, AVI)
+  const handleVideoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const uploadedFiles = Array.from(e.target.files || []);
+    if (uploadedFiles.length === 0) return;
+
+    // Валидация: только MP4, MOV, AVI, до 50MB каждый
+    const validTypes = ['video/mp4', 'video/quicktime', 'video/x-msvideo'];
+    const maxSize = 50 * 1024 * 1024; // 50MB
+
+    const validFiles = uploadedFiles.filter(file => {
+      if (!validTypes.includes(file.type)) {
+        alert(`Видео "${file.name}" имеет недопустимый формат. Разрешены только MP4, MOV, AVI.`);
+        return false;
+      }
+      if (file.size > maxSize) {
+        alert(`Видео "${file.name}" слишком большое. Максимальный размер 50MB.`);
+        return false;
+      }
+      return true;
+    });
+
+    setVideos(prev => [...prev, ...validFiles]);
+    // Очищаем input, чтобы можно было загрузить то же видео снова
+    e.target.value = '';
+  };
+
   // Удаление файла
   const handleRemoveFile = (index: number) => {
     setFiles(prev => prev.filter((_, i) => i !== index));
+  };
+
+  // Удаление видео
+  const handleRemoveVideo = (index: number) => {
+    setVideos(prev => prev.filter((_, i) => i !== index));
   };
 
   return (
@@ -717,10 +759,82 @@ export default function BookingPage() {
                   </div>
                 </section>
 
+                {/* Прикрепление видео */}
+                <section>
+                  <h2 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
+                    <span className="w-8 h-8 rounded-full bg-primary-light flex items-center justify-center text-primary text-sm font-bold">6</span>
+                    Прикрепить видео
+                  </h2>
+                  <div className="border-2 border-dashed border-gray-300 rounded-2xl p-6 text-center hover:border-primary transition-colors">
+                    <input
+                      type="file"
+                      id="video-upload"
+                      multiple
+                      accept=".mp4,.mov,.avi"
+                      onChange={handleVideoUpload}
+                      className="hidden"
+                    />
+                    <label htmlFor="video-upload" className="cursor-pointer">
+                      <div className="flex flex-col items-center">
+                        <span className="text-5xl mb-4">🎥</span>
+                        <p className="text-gray-700 font-medium mb-1">
+                          Нажмите для загрузки видео
+                        </p>
+                        <p className="text-sm text-gray-500">
+                          MP4, MOV, AVI (макс. 50MB каждое)
+                        </p>
+                      </div>
+                    </label>
+                  </div>
+
+                  {/* Список загруженных видео */}
+                  {videos.length > 0 && (
+                    <div className="mt-4 space-y-2">
+                      <p className="text-sm font-medium text-gray-700">
+                        Прикреплённые видео ({videos.length}):
+                      </p>
+                      {videos.map((video, index) => (
+                        <div
+                          key={index}
+                          className="flex items-center justify-between p-3 bg-gray-50 rounded-xl border border-gray-200"
+                        >
+                          <div className="flex items-center gap-3 flex-1 min-w-0">
+                            <span className="text-xl">🎬</span>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-sm font-medium text-gray-900 truncate">
+                                {video.name}
+                              </p>
+                              <p className="text-xs text-gray-500">
+                                {(video.size / 1024 / 1024).toFixed(2)} MB
+                              </p>
+                            </div>
+                          </div>
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveVideo(index)}
+                            className="ml-4 p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                            title="Удалить видео"
+                          >
+                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  <div className="mt-4 bg-blue-50 border border-blue-200 rounded-xl p-4">
+                    <p className="text-sm text-blue-800">
+                      <span className="font-semibold">💡 Совет:</span> Снимите видео, где видно поведение питомца,
+                      симптомы или проблему. Например: как животное ест, ходит, чешется, кашляет и т.д.
+                    </p>
+                  </div>
+                </section>
+
                 {/* Договор и согласия */}
                 <section className="bg-gray-50 p-6 rounded-2xl border border-gray-200">
                   <h2 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-                    <span className="w-8 h-8 rounded-full bg-primary-light flex items-center justify-center text-primary text-sm font-bold">6</span>
+                    <span className="w-8 h-8 rounded-full bg-primary-light flex items-center justify-center text-primary text-sm font-bold">7</span>
                     Договор и согласия <span className="text-red-500">*</span>
                   </h2>
                   

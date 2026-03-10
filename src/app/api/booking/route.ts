@@ -22,6 +22,7 @@ async function sendTelegramNotification(data: {
   selectedDoctor?: string;
   selectedService?: string;
   files?: Array<{ name: string; size: number; type: string }>;
+  videos?: Array<{ name: string; size: number; type: string }>;
 }): Promise<boolean> {
   const botToken = process.env.TELEGRAM_BOT_TOKEN;
   const chatId = process.env.TELEGRAM_CHAT_ID;
@@ -53,6 +54,7 @@ ${data.complaint}
 ${data.selectedDoctor ? `\n👨‍⚕️ <b>Врач:</b> ${data.selectedDoctor}` : ''}
 ${data.selectedService ? `\n💼 <b>Услуга:</b> ${data.selectedService}` : ''}
 ${data.files && data.files.length > 0 ? `\n📎 <b>Файлы:</b> ${data.files.length} шт.` : ''}
+${data.videos && data.videos.length > 0 ? `\n🎥 <b>Видео:</b> ${data.videos.length} шт.` : ''}
 
 ⏰ <b>Время заявки:</b> ${new Date().toLocaleString('ru-RU', { timeZone: 'Europe/Moscow' })}
   `.trim();
@@ -122,6 +124,7 @@ export async function POST(request: NextRequest) {
       selectedDoctor,
       selectedService,
       files,
+      videos,
       consentPersonalData,
       consentOffer,
       consentRules,
@@ -174,6 +177,7 @@ export async function POST(request: NextRequest) {
       selectedDoctor: selectedDoctor ? sanitizeHtml(selectedDoctor) : '',
       selectedService: selectedService ? sanitizeHtml(selectedService) : '',
       files: files || [],
+      videos: videos || [],
     };
 
     // Отправка уведомлений параллельно
