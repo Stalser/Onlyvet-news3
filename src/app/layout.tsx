@@ -76,7 +76,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru">
+    <html lang="ru" className="scroll-smooth">
+      <head>
+        <meta name="theme-color" content="#2C5F72" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="OnlyVet" />
+      </head>
       <body className={`${inter.variable} antialiased`}>
         <OfflinePage />
         <Header />
