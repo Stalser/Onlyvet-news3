@@ -3,21 +3,18 @@
 ## 🚀 Быстрый старт
 
 ### 1. Прочитать контекст
-```
+```bash
 read_file: C:\Users\VPN\Onlyvet-news3\CONTEXT_FOR_NEW_CHAT.md
 ```
 
-### 2. Проверить MCP
-```bash
-curl http://localhost:3000/health && echo " - GitHub"
-curl http://localhost:3006/health && echo " - Context7"
-curl http://localhost:3011/health && echo " - Playwright"
-```
+### 2. Проверить GitHub
+- Репозиторий: https://github.com/Stalser/Onlyvet-news3
+- Ветка: main
+- Автодеплой на Vercel при push
 
-### 3. Проверить Skills
-```bash
-dir C:\Users\VPN\.qwen\skills
-```
+### 3. Проверить Vercel
+- URL: https://onlyvet-news3.vercel.app
+- Деплой: 2-4 минуты после push
 
 ---
 
@@ -25,10 +22,14 @@ dir C:\Users\VPN\.qwen\skills
 
 | Категория | Количество | Статус |
 |-----------|------------|--------|
-| **MCP Серверов** | 19 | ✅ Все на портах 3000-3018 |
-| **Skills** | 15 | ✅ Все в `.qwen/skills/` |
-| **API Keys** | 1/7 | ⚠️ Только Context7 |
-| **Сайт** | 85% | ✅ Работает на Vercel |
+| **Врачи** | 6 | ✅ Реальные специальности |
+| **Страницы** | 20+ | ✅ Все работают |
+| **Форма записи** | 100% | ✅ Файлы + видео + архивы |
+| **Мобильная версия** | 95% | ✅ Адаптивные фильтры |
+| **MCP Серверов** | 19 | ✅ 3 настроены |
+| **Skills** | 15 | ✅ Готовы |
+| **GitHub** | ✅ | ✅ Привязан |
+| **Vercel** | ✅ | ✅ Автодеплой |
 
 ---
 
@@ -42,11 +43,12 @@ npm run build    # Сборка
 npm run lint     # Линтинг
 ```
 
-### Деплой
+### Деплой (автоматический)
 ```bash
 git add .
 git commit -m "Описание изменений"
 git push origin main
+# Vercel задеплоит через 2-4 минуты
 ```
 
 ### MCP запросы
@@ -55,13 +57,13 @@ git push origin main
 POST http://localhost:3000
 {"action":"call","endpoint":"/repos/Stalser/Onlyvet-news3"}
 
+// Vercel
+POST http://localhost:3001
+{"action":"call","endpoint":"/v9/projects"}
+
 // Context7
 POST http://localhost:3006
 {"action":"search","library":"nextjs","query":"middleware"}
-
-// Security
-POST http://localhost:3003
-{"action":"scan","filePath":"src/"}
 ```
 
 ---
@@ -71,38 +73,97 @@ POST http://localhost:3003
 | Файл | Где | Зачем |
 |------|-----|-------|
 | `CONTEXT_FOR_NEW_CHAT.md` | Проект | Полный контекст |
-| `WORK_HISTORY.md` | Проект | История работы |
-| `mcp.json` | `.qwen/` | Конфигурация MCP |
-| `MCP_COMPLETE_GUIDE_V3.md` | `.qwen/` | Полная документация |
+| `WORK_HISTORY.md` | Проект | История изменений |
+| `doctors.ts` | `src/data/` | 6 врачей |
+| `services.ts` | `src/data/` | 4 услуги |
+| `booking/page.tsx` | `src/app/` | Форма записи |
+| `mcp.json` | `.qwen/` | 19 MCP серверов |
 
 ---
 
-## ⚠️ Что требует настройки
+## 👥 Врачи (6 человек)
 
+| ID | Врач | Специальность |
+|----|------|--------------|
+| `elvin` | Курилов Андрей Степанович | Терапевт |
+| `diana` | Диана Чемерилова | Терапевт |
+| `oleg` | Иванов Олег Сергеевич | Диагност |
+| `maria` | Федосова Мария Александровна | Дерматолог |
+| `alexey` | Волков Алексей Дмитриевич | Хирург |
+| `elena` | Козлова Елена Викторовна | Кардиолог |
+
+---
+
+## 📝 Форма записи — возможности
+
+✅ Выбор врача  
+✅ Выбор услуги  
+✅ Загрузка файлов (PDF, JPG, PNG до 10MB)  
+✅ Загрузка видео (MP4, MOV, AVI до 50MB)  
+✅ Загрузка архивов (ZIP, RAR до 100MB)  
+✅ Автосохранение черновика  
+✅ Валидация email и телефона  
+✅ RGPD/152-ФЗ согласия  
+
+---
+
+## ⚠️ 152-ФЗ — Важно!
+
+**Проблема:** Vercel не в России → персданные не должны храниться на Vercel
+
+**Временное решение:**
+- Заявки → Telegram (не храним в БД)
+- Или Email (не храним)
+
+**Постоянное решение:**
+- Российский хостинг (Timeweb/Beget ~250₽/мес)
+- PostgreSQL в России
+- Админка для управления заявками
+
+---
+
+## 🔑 API Keys
+
+### Настроенные ✅
+```
+Context7: ctx7sk-*** (см. .qwen/mcp-servers/.env)
+GitHub: ghp_*** (см. .qwen/mcp-servers/github-mcp.js)
+Vercel: vcp_*** (см. .qwen/mcp-servers/vercel-mcp.js)
+```
+
+### Требуют настройки ⚠️
 ```env
-# Файл: .qwen/mcp-servers/.env
-
 TELEGRAM_BOT_TOKEN=xxx
 TELEGRAM_CHAT_ID=xxx
-STRIPE_SECRET_KEY=xxx
-PGPASSWORD=xxx
-OPENAI_API_KEY=sk-xxx
-FIGMA_TOKEN=xxx
-N8N_API_KEY=xxx
 ```
 
 ---
 
 ## 🎯 Приоритеты
 
-1. 🔴 Настроить PostgreSQL
-2. 🔴 Настроить Telegram бота
-3. 🔴 Создать админ-панель
-4. 🟡 Настроить OpenAI
-5. 🟡 Загрузить фото врачей
+### 🔴 Критичные (сейчас)
+1. Настроить Telegram бота
+2. Решить 152-ФЗ (РФ хостинг)
+
+### 🟡 Важные (потом)
+3. Загрузить фото врачей
+4. Яндекс.Метрика
+
+### 🟢 Желательные (после запуска)
+5. Домен onlyvet.ru
+6. SSL сертификат
 
 ---
 
-**Версия:** 4.0 Ultimate  
-**Дата:** 10 марта 2026 г.  
-**MCP:** 19 | **Skills:** 15
+## 📞 Контакты
+
+- **Email:** consult@onlyvet.ru
+- **Telegram:** @onlyvet_clinic
+- **GitHub:** https://github.com/Stalser/Onlyvet-news3
+- **Vercel:** https://onlyvet-news3.vercel.app
+
+---
+
+**Версия:** 5.0  
+**Дата:** 10 марта 2026 г. (22:30)  
+**Готовность:** 90%
