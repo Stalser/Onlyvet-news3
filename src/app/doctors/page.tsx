@@ -19,7 +19,7 @@ const specializationLabels: Record<Specialization, string> = {
 };
 
 // Фильтр только для врачей, которые есть в базе
-const availableSpecializations: Specialization[] = ['все', 'эксперт', 'терапия', 'диагностика'];
+const availableSpecializations: Specialization[] = ['все', 'эксперт', 'терапия', 'диагностика', 'онкология'];
 
 export default function DoctorsPage() {
   const [selectedSpecialization, setSelectedSpecialization] = useState<Specialization>('все');
