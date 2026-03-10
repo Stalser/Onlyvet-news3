@@ -255,3 +255,23 @@ h1, h2, h3, h4, h5, h6 {
 .animate-bounce-slow {
   animation: bounce-slow 2s ease-in-out infinite;
 }
+
+/* Кнопка-ссылка "Как подключиться" - фикс для :visited и :hover */
+a.header-setup-btn,
+a.header-setup-btn:visited,
+a.header-setup-btn:hover,
+a.header-setup-btn:active {
+  background-color: #2C5F72 !important;
+  color: #FFFFFF !important;
+}
+
+/* Кнопка-ссылка "Записаться на консультацию" - фикс для :visited и :hover */
+a.header-booking-btn,
+a.header-booking-btn:visited,
+a.header-booking-btn:hover,
+a.header-booking-btn:active {
+  background-color: #2C5F72 !important;
+  color: #FFFFFF !important;
+}
+
+
