@@ -129,7 +129,7 @@ export default function DoctorsPage() {
 
       {/* Фильтры */}
       <section className="py-3 bg-white border-b border-gray-200 sticky top-[80px] md:top-[84px] z-40 shadow-sm">
-        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Мобильная версия - горизонтальный скролл */}
           <div className="sm:hidden">
             {/* Специализации - горизонтальный скролл */}
