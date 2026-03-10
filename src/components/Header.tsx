@@ -68,7 +68,8 @@ export default function Header() {
               {/* Кнопка "Как подключиться" — выделена */}
               <Link
                 href={setupLink.href}
-                className="ml-2 px-5 py-2.5 bg-white text-primary font-semibold rounded-xl border-2 border-primary hover:bg-primary hover:text-white hover:shadow-md transition-all duration-200"
+                className="ml-2 px-5 py-2.5 rounded-xl font-semibold transition-all duration-200"
+                style={{ backgroundColor: '#2C5F72', color: '#FFFFFF' }}
               >
                 {setupLink.label}
               </Link>
@@ -281,8 +282,8 @@ export default function Header() {
                 <Link
                   href={setupLink.href}
                   onClick={() => setIsMenuOpen(false)}
-                  className="w-full text-center px-4 py-4 bg-white text-primary font-bold rounded-xl shadow-lg border-2 border-primary transition-all animate-fade-in-up block"
-                  style={{ animationDelay: `${mainNavLinks.length * 50}ms` }}
+                  className="w-full text-center px-4 py-4 rounded-xl shadow-lg transition-all animate-fade-in-up block font-bold"
+                  style={{ backgroundColor: '#2C5F72', color: '#FFFFFF', animationDelay: `${mainNavLinks.length * 50}ms` }}
                 >
                   {setupLink.label}
                 </Link>
@@ -312,7 +313,8 @@ export default function Header() {
                 <Link
                   href="/booking"
                   onClick={() => setIsMenuOpen(false)}
-                  className="block w-full text-center px-6 py-4 bg-gradient-to-r from-primary to-primary-dark text-white rounded-xl hover:shadow-lg transition-all font-medium text-lg shadow-md"
+                  className="block w-full text-center px-6 py-4 rounded-xl shadow-lg transition-all font-medium text-lg"
+                  style={{ backgroundColor: '#2C5F72', color: '#FFFFFF' }}
                 >
                   Записаться на консультацию
                 </Link>
