@@ -8,18 +8,20 @@ import ScaleIn from '@/components/ScaleIn';
 import Carousel from '@/components/Carousel';
 import { doctors } from '@/data/doctors';
 
-type Specialization = 'все' | 'эксперт' | 'терапия' | 'диагностика' | 'онкология';
+type Specialization = 'все' | 'терапевт' | 'диагност' | 'хирург' | 'дерматолог' | 'кардиолог' | 'невролог';
 
 const specializationLabels: Record<Specialization, string> = {
   'все': 'Все врачи',
-  'эксперт': 'Эксперты',
-  'терапия': 'Терапевты',
-  'диагностика': 'Диагносты',
-  'онкология': 'Онкологи',
+  'терапевт': 'Терапевты',
+  'диагност': 'Диагносты',
+  'хирург': 'Хирурги',
+  'дерматолог': 'Дерматологи',
+  'кардиолог': 'Кардиологи',
+  'невролог': 'Неврологи',
 };
 
 // Фильтр только для врачей, которые есть в базе
-const availableSpecializations: Specialization[] = ['все', 'эксперт', 'терапия', 'диагностика', 'онкология'];
+const availableSpecializations: Specialization[] = ['все', 'терапевт', 'диагност', 'хирург', 'дерматолог', 'кардиолог'];
 
 export default function DoctorsPage() {
   const [selectedSpecialization, setSelectedSpecialization] = useState<Specialization>('все');
@@ -97,11 +99,11 @@ export default function DoctorsPage() {
                   <div className="text-sm text-gray-600 font-medium">Врача в команде</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-4xl md:text-5xl font-bold text-primary mb-2">10+</div>
-                  <div className="text-sm text-gray-600 font-medium">Лет опыта</div>
+                  <div className="text-4xl md:text-5xl font-bold text-primary mb-2">6</div>
+                  <div className="text-sm text-gray-600 font-medium">Специализаций</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-4xl md:text-5xl font-bold text-primary mb-2">1500+</div>
+                  <div className="text-4xl md:text-5xl font-bold text-primary mb-2">2000+</div>
                   <div className="text-sm text-gray-600 font-medium">Консультаций</div>
                 </div>
               </div>
