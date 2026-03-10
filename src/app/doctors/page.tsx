@@ -238,7 +238,7 @@ export default function DoctorsPage() {
       <section className="py-16 lg:py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {filteredDoctors.length > 0 ? (
-            <Carousel itemsPerPage={3} autoPlay autoPlayInterval={7000}>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {filteredDoctors.map((doctor) => (
                 <div key={doctor.id} className="bg-white rounded-3xl border border-gray-200 overflow-hidden hover:border-primary-light hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 h-full flex flex-col">
                   {/* Фото врача */}
@@ -330,7 +330,7 @@ export default function DoctorsPage() {
                   </div>
                 </div>
               ))}
-            </Carousel>
+            </div>
           ) : (
             <div className="text-center py-16">
               <div className="text-6xl mb-4">🔍</div>
