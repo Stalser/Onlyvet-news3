@@ -278,14 +278,16 @@ export default function Header() {
               </div>
 
               {/* Кнопка "Как подключиться" — выделена */}
-              <Link
-                href={setupLink.href}
-                onClick={() => setIsMenuOpen(false)}
-                className="w-full text-center px-4 py-3.5 bg-primary text-white font-semibold rounded-xl hover:bg-primary-dark transition-all shadow-md animate-fade-in-up !text-white"
-                style={{ color: '#FFFFFF', animationDelay: `${mainNavLinks.length * 50}ms` }}
-              >
-                {setupLink.label}
-              </Link>
+              <div className="py-3">
+                <Link
+                  href={setupLink.href}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="w-full text-center px-4 py-4 bg-gradient-to-r from-primary to-primary-dark text-white font-bold rounded-xl shadow-lg transition-all animate-fade-in-up block"
+                  style={{ animationDelay: `${mainNavLinks.length * 50}ms` }}
+                >
+                  {setupLink.label}
+                </Link>
+              </div>
 
               {/* Разделитель */}
               <div className="border-t border-gray-200 my-2" />
