@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import CookieBanner from "@/components/CookieBanner";
 import OfflinePage from "@/components/OfflinePage";
+import YandexWidget from "@/components/YandexWidget";
 
 const inter = Inter({
   subsets: ["cyrillic", "latin"],
@@ -89,6 +90,7 @@ export default function RootLayout({
         <main className="min-h-screen">{children}</main>
         <Footer />
         <CookieBanner />
+        <YandexWidget />
       </body>
     </html>
   );
