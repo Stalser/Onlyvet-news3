@@ -35,11 +35,8 @@ export default function BookingPage() {
   const [selectedDoctor, setSelectedDoctor] = useState('');
   const [selectedService, setSelectedService] = useState('');
 
-  // Прикреплённые файлы
-  const [files, setFiles] = useState<File[]>([]);
-
-  // Прикреплённые видео
-  const [videos, setVideos] = useState<File[]>([]);
+  // Прикреплённые материалы (файлы, видео, архивы)
+  const [attachments, setAttachments] = useState<File[]>([]);
 
   // Согласия
   const [consentPersonalData, setConsentPersonalData] = useState(false);
@@ -85,7 +82,7 @@ export default function BookingPage() {
   // Автосохранение черновика в localStorage
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    
+
     const draft = {
       lastName,
       firstName,
@@ -100,7 +97,7 @@ export default function BookingPage() {
       complaint,
       selectedDoctor,
       selectedService,
-      videoNames: videos.map(v => ({ name: v.name, size: v.size })),
+      attachmentNames: attachments.map(a => ({ name: a.name, size: a.size, type: a.type })),
     };
     localStorage.setItem('bookingDraft', JSON.stringify(draft));
   }, [
@@ -117,7 +114,7 @@ export default function BookingPage() {
     complaint,
     selectedDoctor,
     selectedService,
-    videos,
+    attachments,
   ]);
 
   // Валидация email
@@ -177,8 +174,7 @@ export default function BookingPage() {
           complaint,
           selectedDoctor,
           selectedService,
-          files: files.map(f => ({ name: f.name, size: f.size, type: f.type })),
-          videos: videos.map(v => ({ name: v.name, size: v.size, type: v.type })),
+          attachments: attachments.map(a => ({ name: a.name, size: a.size, type: a.type })),
           consentPersonalData,
           consentOffer,
           consentRules,
@@ -218,8 +214,7 @@ export default function BookingPage() {
     setComplaint('');
     setSelectedDoctor('');
     setSelectedService('');
-    setFiles([]);
-    setVideos([]);
+    setAttachments([]);
     setConsentPersonalData(false);
     setConsentOffer(false);
     setConsentRules(false);
@@ -234,75 +229,85 @@ export default function BookingPage() {
     window.open('https://t.me/onlyvet_clinic', '_blank', 'noopener,noreferrer');
   };
 
-  // Обработка загрузки файлов (PDF, JPG, PNG, ZIP, RAR)
-  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // Обработка загрузки материалов (PDF, JPG, PNG, ZIP, RAR, MP4, MOV, AVI)
+  const handleAttachmentUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const uploadedFiles = Array.from(e.target.files || []);
     if (uploadedFiles.length === 0) return;
 
-    // Валидация: PDF, JPG, PNG до 10MB, ZIP, RAR до 100MB
-    const validTypes = ['application/pdf', 'image/jpeg', 'image/png', 'application/zip', 'application/x-rar-compressed', 'application/x-zip-compressed'];
-    
+    // Валидация по типам
+    const validTypes = [
+      'application/pdf',
+      'image/jpeg',
+      'image/png',
+      'application/zip',
+      'application/x-rar-compressed',
+      'application/x-zip-compressed',
+      'video/mp4',
+      'video/quicktime',
+      'video/x-msvideo',
+    ];
+
     const validFiles = uploadedFiles.filter(file => {
       if (!validTypes.includes(file.type)) {
         // Проверяем по расширению, если тип не определился
         const ext = file.name.split('.').pop()?.toLowerCase();
-        if (!['pdf', 'jpg', 'jpeg', 'png', 'zip', 'rar'].includes(ext || '')) {
-          alert(`Файл "${file.name}" имеет недопустимый формат. Разрешены только PDF, JPG, PNG, ZIP, RAR.`);
+        if (!['pdf', 'jpg', 'jpeg', 'png', 'zip', 'rar', 'mp4', 'mov', 'avi'].includes(ext || '')) {
+          alert(`Файл "${file.name}" имеет недопустимый формат. Разрешены: PDF, JPG, PNG, ZIP, RAR, MP4, MOV, AVI.`);
           return false;
         }
       }
-      
+
       // Определяем максимальный размер
-      const isArchive = file.type.includes('zip') || file.type.includes('rar') || file.name.toLowerCase().endsWith('.zip') || file.name.toLowerCase().endsWith('.rar');
-      const maxSize = isArchive ? 100 * 1024 * 1024 : 10 * 1024 * 1024; // 100MB для архивов, 10MB для файлов
-      
+      const ext = file.name.split('.').pop()?.toLowerCase();
+      const isVideo = file.type.startsWith('video/') || ['mp4', 'mov', 'avi'].includes(ext || '');
+      const isArchive = file.type.includes('zip') || file.type.includes('rar') || ['zip', 'rar'].includes(ext || '');
+
+      let maxSize = 10 * 1024 * 1024; // 10MB по умолчанию
+      if (isVideo) maxSize = 50 * 1024 * 1024; // 50MB для видео
+      if (isArchive) maxSize = 100 * 1024 * 1024; // 100MB для архивов
+
       if (file.size > maxSize) {
-        const sizeLabel = isArchive ? '100MB' : '10MB';
+        const sizeLabel = isArchive ? '100MB' : isVideo ? '50MB' : '10MB';
         alert(`Файл "${file.name}" слишком большой. Максимальный размер ${sizeLabel}.`);
         return false;
       }
       return true;
     });
 
-    setFiles(prev => [...prev, ...validFiles]);
+    setAttachments(prev => [...prev, ...validFiles]);
     // Очищаем input, чтобы можно было загрузить тот же файл снова
     e.target.value = '';
   };
 
-  // Обработка загрузки видео (MP4, MOV, AVI)
-  const handleVideoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const uploadedFiles = Array.from(e.target.files || []);
-    if (uploadedFiles.length === 0) return;
-
-    // Валидация: только MP4, MOV, AVI, до 50MB каждый
-    const validTypes = ['video/mp4', 'video/quicktime', 'video/x-msvideo'];
-    const maxSize = 50 * 1024 * 1024; // 50MB
-
-    const validFiles = uploadedFiles.filter(file => {
-      if (!validTypes.includes(file.type)) {
-        alert(`Видео "${file.name}" имеет недопустимый формат. Разрешены только MP4, MOV, AVI.`);
-        return false;
-      }
-      if (file.size > maxSize) {
-        alert(`Видео "${file.name}" слишком большое. Максимальный размер 50MB.`);
-        return false;
-      }
-      return true;
-    });
-
-    setVideos(prev => [...prev, ...validFiles]);
-    // Очищаем input, чтобы можно было загрузить то же видео снова
-    e.target.value = '';
-  };
-
   // Удаление файла
-  const handleRemoveFile = (index: number) => {
-    setFiles(prev => prev.filter((_, i) => i !== index));
+  const handleRemoveAttachment = (index: number) => {
+    setAttachments(prev => prev.filter((_, i) => i !== index));
   };
 
-  // Удаление видео
-  const handleRemoveVideo = (index: number) => {
-    setVideos(prev => prev.filter((_, i) => i !== index));
+  // Получение иконки по типу файла
+  const getAttachmentIcon = (file: File) => {
+    const ext = file.name.split('.').pop()?.toLowerCase();
+    const isVideo = file.type.startsWith('video/') || ['mp4', 'mov', 'avi'].includes(ext || '');
+    const isArchive = file.type.includes('zip') || file.type.includes('rar') || ['zip', 'rar'].includes(ext || '');
+    const isPdf = file.type === 'application/pdf';
+    const isImage = file.type.startsWith('image/');
+
+    if (isVideo) return '🎬';
+    if (isArchive) return '📦';
+    if (isPdf) return '📄';
+    if (isImage) return '🖼️';
+    return '📎';
+  };
+
+  // Получение лимита размера для типа файла
+  const getSizeLimit = (file: File) => {
+    const ext = file.name.split('.').pop()?.toLowerCase();
+    const isVideo = file.type.startsWith('video/') || ['mp4', 'mov', 'avi'].includes(ext || '');
+    const isArchive = file.type.includes('zip') || file.type.includes('rar') || ['zip', 'rar'].includes(ext || '');
+
+    if (isArchive) return '100MB';
+    if (isVideo) return '50MB';
+    return '10MB';
   };
 
   return (
@@ -694,72 +699,80 @@ export default function BookingPage() {
                   </div>
                 </section>
 
-                {/* Прикрепление файлов */}
+                {/* Прикреплённые материалы */}
                 <section>
                   <h2 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
                     <span className="w-8 h-8 rounded-full bg-primary-light flex items-center justify-center text-primary text-sm font-bold">5</span>
-                    Прикрепить файлы
+                    Материалы к консультации
                   </h2>
-                  <div className="border-2 border-dashed border-gray-300 rounded-2xl p-6 text-center hover:border-primary transition-colors">
+
+                  {/* Зона загрузки */}
+                  <div className="border-2 border-dashed border-gray-300 rounded-2xl p-6 text-center hover:border-primary transition-colors bg-gray-50">
                     <input
                       type="file"
-                      id="file-upload"
+                      id="attachment-upload"
                       multiple
-                      accept=".pdf,.jpg,.jpeg,.png,.zip,.rar"
-                      onChange={handleFileUpload}
+                      accept=".pdf,.jpg,.jpeg,.png,.zip,.rar,.mp4,.mov,.avi"
+                      onChange={handleAttachmentUpload}
                       className="hidden"
                     />
-                    <label htmlFor="file-upload" className="cursor-pointer">
+                    <label htmlFor="attachment-upload" className="cursor-pointer">
                       <div className="flex flex-col items-center">
-                        <span className="text-5xl mb-4">📎</span>
-                        <p className="text-gray-700 font-medium mb-1">
-                          Нажмите для загрузки файлов
+                        <span className="text-5xl mb-3">📎</span>
+                        <p className="text-gray-800 font-semibold mb-1">
+                          Перетащите файлы сюда или нажмите для выбора
                         </p>
-                        <p className="text-sm text-gray-500">
-                          PDF, JPG, PNG (до 10MB) | ZIP, RAR (до 100MB)
+                        <div className="flex flex-wrap justify-center gap-2 mt-2">
+                          <span className="text-xs px-2 py-1 bg-white rounded border text-gray-600">📄 PDF</span>
+                          <span className="text-xs px-2 py-1 bg-white rounded border text-gray-600">🖼️ JPG, PNG</span>
+                          <span className="text-xs px-2 py-1 bg-white rounded border text-gray-600">📦 ZIP, RAR</span>
+                          <span className="text-xs px-2 py-1 bg-white rounded border text-gray-600">🎬 MP4, MOV, AVI</span>
+                        </div>
+                        <p className="text-xs text-gray-500 mt-3">
+                          Документы до 10MB • Видео до 50MB • Архивы до 100MB
                         </p>
                       </div>
                     </label>
                   </div>
 
                   {/* Список загруженных файлов */}
-                  {files.length > 0 && (
+                  {attachments.length > 0 && (
                     <div className="mt-4 space-y-2">
-                      <p className="text-sm font-medium text-gray-700">
-                        Прикреплённые файлы ({files.length}):
-                      </p>
-                      {files.map((file, index) => {
-                        const isZip = file.type.includes('zip') || file.name.toLowerCase().endsWith('.zip');
-                        const isRar = file.type.includes('rar') || file.name.toLowerCase().endsWith('.rar');
-                        const isPdf = file.type === 'application/pdf';
-                        
-                        let icon = '📄';
-                        if (isZip || isRar) icon = '📦';
-                        else if (isPdf) icon = '📄';
-                        else icon = '🖼️';
-                        
+                      <div className="flex items-center justify-between">
+                        <p className="text-sm font-medium text-gray-700">
+                          Прикреплённые файлы ({attachments.length})
+                        </p>
+                        <button
+                          type="button"
+                          onClick={() => setAttachments([])}
+                          className="text-xs text-red-500 hover:text-red-700 hover:underline"
+                        >
+                          Очистить все
+                        </button>
+                      </div>
+                      {attachments.map((file, index) => {
+                        const icon = getAttachmentIcon(file);
+                        const sizeLimit = getSizeLimit(file);
+
                         return (
                           <div
                             key={index}
-                            className="flex items-center justify-between p-3 bg-gray-50 rounded-xl border border-gray-200"
+                            className="flex items-center gap-3 p-3 bg-white rounded-xl border border-gray-200 hover:border-primary/50 transition-colors"
                           >
-                            <div className="flex items-center gap-3 flex-1 min-w-0">
-                              <span className="text-xl">{icon}</span>
-                              <div className="flex-1 min-w-0">
-                                <p className="text-sm font-medium text-gray-900 truncate">
-                                  {file.name}
-                                </p>
-                                <p className="text-xs text-gray-500">
-                                  {(file.size / 1024 / 1024).toFixed(2)} MB
-                                  {isZip || isRar ? ' (архив)' : ''}
-                                </p>
-                              </div>
+                            <span className="text-2xl flex-shrink-0">{icon}</span>
+                            <div className="flex-1 min-w-0">
+                              <p className="text-sm font-medium text-gray-900 truncate">
+                                {file.name}
+                              </p>
+                              <p className="text-xs text-gray-500">
+                                {(file.size / 1024 / 1024).toFixed(2)} MB • Лимит: {sizeLimit}
+                              </p>
                             </div>
                             <button
                               type="button"
-                              onClick={() => handleRemoveFile(index)}
-                              className="ml-4 p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
-                              title="Удалить файл"
+                              onClick={() => handleRemoveAttachment(index)}
+                              className="p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors flex-shrink-0"
+                              title="Удалить"
                             >
                               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -770,82 +783,12 @@ export default function BookingPage() {
                       })}
                     </div>
                   )}
-                  <div className="mt-4 bg-amber-50 border border-amber-200 rounded-xl p-4">
-                    <p className="text-sm text-amber-800">
-                      <span className="font-semibold">💡 Совет:</span> Прикрепите результаты анализов,
-                      УЗИ, фото питомца или другие документы. Для большого количества файлов используйте ZIP/RAR архивы.
-                    </p>
-                  </div>
-                </section>
 
-                {/* Прикрепление видео */}
-                <section>
-                  <h2 className="text-xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-                    <span className="w-8 h-8 rounded-full bg-primary-light flex items-center justify-center text-primary text-sm font-bold">6</span>
-                    Прикрепить видео
-                  </h2>
-                  <div className="border-2 border-dashed border-gray-300 rounded-2xl p-6 text-center hover:border-primary transition-colors">
-                    <input
-                      type="file"
-                      id="video-upload"
-                      multiple
-                      accept=".mp4,.mov,.avi"
-                      onChange={handleVideoUpload}
-                      className="hidden"
-                    />
-                    <label htmlFor="video-upload" className="cursor-pointer">
-                      <div className="flex flex-col items-center">
-                        <span className="text-5xl mb-4">🎥</span>
-                        <p className="text-gray-700 font-medium mb-1">
-                          Нажмите для загрузки видео
-                        </p>
-                        <p className="text-sm text-gray-500">
-                          MP4, MOV, AVI (макс. 50MB каждое)
-                        </p>
-                      </div>
-                    </label>
-                  </div>
-
-                  {/* Список загруженных видео */}
-                  {videos.length > 0 && (
-                    <div className="mt-4 space-y-2">
-                      <p className="text-sm font-medium text-gray-700">
-                        Прикреплённые видео ({videos.length}):
-                      </p>
-                      {videos.map((video, index) => (
-                        <div
-                          key={index}
-                          className="flex items-center justify-between p-3 bg-gray-50 rounded-xl border border-gray-200"
-                        >
-                          <div className="flex items-center gap-3 flex-1 min-w-0">
-                            <span className="text-xl">🎬</span>
-                            <div className="flex-1 min-w-0">
-                              <p className="text-sm font-medium text-gray-900 truncate">
-                                {video.name}
-                              </p>
-                              <p className="text-xs text-gray-500">
-                                {(video.size / 1024 / 1024).toFixed(2)} MB
-                              </p>
-                            </div>
-                          </div>
-                          <button
-                            type="button"
-                            onClick={() => handleRemoveVideo(index)}
-                            className="ml-4 p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
-                            title="Удалить видео"
-                          >
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                            </svg>
-                          </button>
-                        </div>
-                      ))}
-                    </div>
-                  )}
+                  {/* Совет */}
                   <div className="mt-4 bg-blue-50 border border-blue-200 rounded-xl p-4">
                     <p className="text-sm text-blue-800">
-                      <span className="font-semibold">💡 Совет:</span> Снимите видео, где видно поведение питомца,
-                      симптомы или проблему. Например: как животное ест, ходит, чешется, кашляет и т.д.
+                      <span className="font-semibold">💡 Совет:</span> Прикрепите анализы, фото или видео питомца — 
+                      это поможет врачу точнее оценить ситуацию. Для большого количества файлов используйте ZIP/RAR архив.
                     </p>
                   </div>
                 </section>
