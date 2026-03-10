@@ -281,8 +281,8 @@ export default function Header() {
               <Link
                 href={setupLink.href}
                 onClick={() => setIsMenuOpen(false)}
-                className="w-full text-center px-4 py-3.5 bg-primary text-white font-semibold rounded-xl hover:bg-primary-dark transition-all shadow-md animate-fade-in-up"
-                style={{ animationDelay: `${mainNavLinks.length * 50}ms` }}
+                className="w-full text-center px-4 py-3.5 bg-primary text-white font-semibold rounded-xl hover:bg-primary-dark transition-all shadow-md animate-fade-in-up !text-white"
+                style={{ color: '#FFFFFF', animationDelay: `${mainNavLinks.length * 50}ms` }}
               >
                 {setupLink.label}
               </Link>
