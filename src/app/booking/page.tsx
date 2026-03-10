@@ -234,22 +234,31 @@ export default function BookingPage() {
     window.open('https://t.me/onlyvet_clinic', '_blank', 'noopener,noreferrer');
   };
 
-  // Обработка загрузки файлов (PDF, JPG, PNG)
+  // Обработка загрузки файлов (PDF, JPG, PNG, ZIP, RAR)
   const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     const uploadedFiles = Array.from(e.target.files || []);
     if (uploadedFiles.length === 0) return;
 
-    // Валидация: только PDF, JPG, PNG, до 10MB каждый
-    const validTypes = ['application/pdf', 'image/jpeg', 'image/png'];
-    const maxSize = 10 * 1024 * 1024; // 10MB
-
+    // Валидация: PDF, JPG, PNG до 10MB, ZIP, RAR до 100MB
+    const validTypes = ['application/pdf', 'image/jpeg', 'image/png', 'application/zip', 'application/x-rar-compressed', 'application/x-zip-compressed'];
+    
     const validFiles = uploadedFiles.filter(file => {
       if (!validTypes.includes(file.type)) {
-        alert(`Файл "${file.name}" имеет недопустимый формат. Разрешены только PDF, JPG, PNG.`);
-        return false;
+        // Проверяем по расширению, если тип не определился
+        const ext = file.name.split('.').pop()?.toLowerCase();
+        if (!['pdf', 'jpg', 'jpeg', 'png', 'zip', 'rar'].includes(ext || '')) {
+          alert(`Файл "${file.name}" имеет недопустимый формат. Разрешены только PDF, JPG, PNG, ZIP, RAR.`);
+          return false;
+        }
       }
+      
+      // Определяем максимальный размер
+      const isArchive = file.type.includes('zip') || file.type.includes('rar') || file.name.toLowerCase().endsWith('.zip') || file.name.toLowerCase().endsWith('.rar');
+      const maxSize = isArchive ? 100 * 1024 * 1024 : 10 * 1024 * 1024; // 100MB для архивов, 10MB для файлов
+      
       if (file.size > maxSize) {
-        alert(`Файл "${file.name}" слишком большой. Максимальный размер 10MB.`);
+        const sizeLabel = isArchive ? '100MB' : '10MB';
+        alert(`Файл "${file.name}" слишком большой. Максимальный размер ${sizeLabel}.`);
         return false;
       }
       return true;
@@ -696,7 +705,7 @@ export default function BookingPage() {
                       type="file"
                       id="file-upload"
                       multiple
-                      accept=".pdf,.jpg,.jpeg,.png"
+                      accept=".pdf,.jpg,.jpeg,.png,.zip,.rar"
                       onChange={handleFileUpload}
                       className="hidden"
                     />
@@ -707,7 +716,7 @@ export default function BookingPage() {
                           Нажмите для загрузки файлов
                         </p>
                         <p className="text-sm text-gray-500">
-                          PDF, JPG, PNG (макс. 10MB каждый)
+                          PDF, JPG, PNG (до 10MB) | ZIP, RAR (до 100MB)
                         </p>
                       </div>
                     </label>
@@ -719,42 +728,52 @@ export default function BookingPage() {
                       <p className="text-sm font-medium text-gray-700">
                         Прикреплённые файлы ({files.length}):
                       </p>
-                      {files.map((file, index) => (
-                        <div
-                          key={index}
-                          className="flex items-center justify-between p-3 bg-gray-50 rounded-xl border border-gray-200"
-                        >
-                          <div className="flex items-center gap-3 flex-1 min-w-0">
-                            <span className="text-xl">
-                              {file.type === 'application/pdf' ? '📄' : '🖼️'}
-                            </span>
-                            <div className="flex-1 min-w-0">
-                              <p className="text-sm font-medium text-gray-900 truncate">
-                                {file.name}
-                              </p>
-                              <p className="text-xs text-gray-500">
-                                {(file.size / 1024 / 1024).toFixed(2)} MB
-                              </p>
-                            </div>
-                          </div>
-                          <button
-                            type="button"
-                            onClick={() => handleRemoveFile(index)}
-                            className="ml-4 p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
-                            title="Удалить файл"
+                      {files.map((file, index) => {
+                        const isZip = file.type.includes('zip') || file.name.toLowerCase().endsWith('.zip');
+                        const isRar = file.type.includes('rar') || file.name.toLowerCase().endsWith('.rar');
+                        const isPdf = file.type === 'application/pdf';
+                        
+                        let icon = '📄';
+                        if (isZip || isRar) icon = '📦';
+                        else if (isPdf) icon = '📄';
+                        else icon = '🖼️';
+                        
+                        return (
+                          <div
+                            key={index}
+                            className="flex items-center justify-between p-3 bg-gray-50 rounded-xl border border-gray-200"
                           >
-                            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                            </svg>
-                          </button>
-                        </div>
-                      ))}
+                            <div className="flex items-center gap-3 flex-1 min-w-0">
+                              <span className="text-xl">{icon}</span>
+                              <div className="flex-1 min-w-0">
+                                <p className="text-sm font-medium text-gray-900 truncate">
+                                  {file.name}
+                                </p>
+                                <p className="text-xs text-gray-500">
+                                  {(file.size / 1024 / 1024).toFixed(2)} MB
+                                  {isZip || isRar ? ' (архив)' : ''}
+                                </p>
+                              </div>
+                            </div>
+                            <button
+                              type="button"
+                              onClick={() => handleRemoveFile(index)}
+                              className="ml-4 p-2 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                              title="Удалить файл"
+                            >
+                              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                              </svg>
+                            </button>
+                          </div>
+                        );
+                      })}
                     </div>
                   )}
                   <div className="mt-4 bg-amber-50 border border-amber-200 rounded-xl p-4">
                     <p className="text-sm text-amber-800">
                       <span className="font-semibold">💡 Совет:</span> Прикрепите результаты анализов,
-                      УЗИ, фото питомца или другие документы — это поможет врачу дать более точные рекомендации.
+                      УЗИ, фото питомца или другие документы. Для большого количества файлов используйте ZIP/RAR архивы.
                     </p>
                   </div>
                 </section>
