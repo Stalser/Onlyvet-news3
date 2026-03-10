@@ -1,0 +1,13 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /404
+Disallow: /429
+Disallow: /maintenance
+Disallow: /api/
+
+# Host
+Host: https://onlyvet-news3.vercel.app
+
+# Sitemaps
+Sitemap: https://onlyvet-news3.vercel.app/sitemap.xml

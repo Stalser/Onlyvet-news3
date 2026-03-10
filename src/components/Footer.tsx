@@ -1,0 +1,138 @@
+import Link from 'next/link';
+import Image from 'next/image';
+
+const footerLinks = {
+  services: [
+    { href: '/services', label: 'Услуги и цены', id: 'service-all' },
+    { href: '/services#диагностика', label: 'Диагностика', id: 'service-diagnosis' },
+    { href: '/services#консультация', label: 'Консультации', id: 'service-consult' },
+    { href: '/booking', label: 'Записаться', id: 'service-booking' },
+  ],
+  info: [
+    { href: '/how-it-works', label: 'Как это работает', id: 'info-how' },
+    { href: '/safety', label: 'Безопасность', id: 'info-safety' },
+    { href: '/faq', label: 'FAQ', id: 'info-faq' },
+    { href: '/about', label: 'О сервисе', id: 'info-about' },
+  ],
+  legal: [
+    { href: '/documents', label: 'Документы', id: 'legal-docs' },
+    { href: '/documents/privacy', label: 'Политика конфиденциальности', id: 'legal-privacy' },
+    { href: '/documents/terms', label: 'Пользовательское соглашение', id: 'legal-terms' },
+  ],
+};
+
+export default function Footer() {
+  return (
+    <footer className="bg-gradient-to-b from-gray-50 to-white border-t border-gray-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* Логотип и описание */}
+          <div className="lg:col-span-1">
+            <Link href="/" className="inline-block mb-4 group">
+              <Image
+                src="/images/logo.svg"
+                alt="OnlyVet"
+                width={48}
+                height={48}
+                className="h-12 w-auto group-hover:opacity-80 transition-opacity"
+                priority
+              />
+            </Link>
+            <p className="text-gray-600 text-sm leading-relaxed mb-4">
+              Профессиональные онлайн-консультации ветеринарного врача для кошек и собак
+            </p>
+
+            {/* Контакты */}
+            <div className="space-y-2">
+              <a href={`mailto:${process.env.NEXT_PUBLIC_EMAIL || 'consult@onlyvet.ru'}`} className="flex items-center gap-2 text-sm text-gray-600 hover:text-primary transition-colors">
+                <span className="w-5 h-5 rounded-full bg-primary-light flex items-center justify-center text-xs">✉</span>
+                {process.env.NEXT_PUBLIC_EMAIL || 'consult@onlyvet.ru'}
+              </a>
+              <a href={`tel:${process.env.NEXT_PUBLIC_PHONE_TEL || '+79000000000'}`} className="flex items-center gap-2 text-sm text-gray-600 hover:text-primary transition-colors">
+                <span className="w-5 h-5 rounded-full bg-primary-light flex items-center justify-center text-xs">📞</span>
+                {process.env.NEXT_PUBLIC_PHONE_DISPLAY || '+7 900 000-00-00'}
+              </a>
+            </div>
+
+            {/* Соцсети */}
+            <div className="flex gap-3 mt-6">
+              <a href="https://vk.com/onlyvet_clinic" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                <Image src="/images/free-icon-vk-3670055.svg" alt="VK" width={20} height={20} />
+              </a>
+              <a href="https://t.me/onlyvet_clinic" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-sky-500 flex items-center justify-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                <Image src="/images/free-icon-telegram-2111646.svg" alt="Telegram" width={20} height={20} />
+              </a>
+              <a href="https://ok.ru/onlyvet" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                <Image src="/images/free-icon-odnoklassniki-3670250.svg" alt="OK" width={20} height={20} />
+              </a>
+            </div>
+          </div>
+
+          {/* Услуги */}
+          <div>
+            <h3 className="font-semibold text-gray-900 mb-4 text-base">Услуги</h3>
+            <ul className="space-y-2">
+              {footerLinks.services.map((link) => (
+                <li key={link.id}>
+                  <Link href={link.href} className="text-gray-600 hover:text-primary text-sm transition-colors">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Информация */}
+          <div>
+            <h3 className="font-semibold text-gray-900 mb-4 text-base">Информация</h3>
+            <ul className="space-y-2">
+              {footerLinks.info.map((link) => (
+                <li key={link.id}>
+                  <Link href={link.href} className="text-gray-600 hover:text-primary text-sm transition-colors">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Документы */}
+          <div>
+            <h3 className="font-semibold text-gray-900 mb-4 text-base">Документы</h3>
+            <ul className="space-y-2">
+              {footerLinks.legal.map((link) => (
+                <li key={link.id}>
+                  <Link href={link.href} className="text-gray-600 hover:text-primary text-sm transition-colors">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* Нижняя строка */}
+        <div className="mt-12 pt-8 border-t border-gray-200">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-gray-500 text-sm">
+              © {new Date().getFullYear()} OnlyVet. Все права защищены.
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-4 text-xs text-gray-500">
+              <Link href="/documents/terms" className="hover:text-primary transition-colors">
+                Пользовательское соглашение
+              </Link>
+              <span>•</span>
+              <Link href="/documents/privacy" className="hover:text-primary transition-colors">
+                Политика конфиденциальности
+              </Link>
+              <span>•</span>
+              <p className="text-gray-400">
+                Онлайн-консультация не заменяет очный приём
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}

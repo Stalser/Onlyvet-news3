@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="500" viewBox="0 0 400 500">
+  <defs>
+    <linearGradient id="dianaBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7B8FA3"/>
+      <stop offset="100%" stop-color="#928A97"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="500" fill="url(#dianaBg)"/>
+  <text x="50%" y="45%" text-anchor="middle" dominant-baseline="middle" font-family="Arial" font-size="100" font-weight="bold" fill="white" opacity="0.25">ДЧ</text>
+  <text x="50%" y="460" text-anchor="middle" font-family="Arial" font-size="18" font-weight="bold" fill="white">Диана Чемерилова</text>
+  <text x="50%" y="480" text-anchor="middle" font-family="Arial" font-size="14" fill="white" opacity="0.8">Ветеринарный врач</text>
+</svg>
