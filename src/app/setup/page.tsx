@@ -143,23 +143,23 @@ export default function SetupGuidePage() {
       {/* Выбор платформы */}
       <section className="py-4 sm:py-8 bg-white border-b border-gray-200 sticky top-20 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap gap-2 sm:gap-4 justify-center">
+          <div className="flex flex-row gap-2 sm:gap-4 justify-center items-center">
             {(Object.keys(platforms) as Array<keyof typeof platforms>).map((key) => (
               <button
                 key={key}
                 onClick={() => setActivePlatform(key)}
-                className={`px-3 py-2 sm:px-6 sm:py-4 rounded-xl sm:rounded-2xl font-semibold transition-all duration-300 flex items-center gap-2 sm:gap-3 ${
+                className={`px-2 py-2 sm:px-6 sm:py-4 rounded-xl sm:rounded-2xl font-semibold transition-all duration-300 flex items-center gap-1.5 sm:gap-3 flex-shrink-0 ${
                   activePlatform === key
                     ? `bg-gradient-to-r ${platforms[key].color} text-white shadow-lg scale-105`
                     : `${platforms[key].bgColor} text-gray-800 ${platforms[key].hoverColor}`
                 }`}
               >
-                <div className="w-8 h-8 sm:w-12 sm:h-12">{platforms[key].icon}</div>
-                <span className="text-xs sm:text-base">{platforms[key].name}</span>
+                <div className="w-7 h-7 sm:w-12 sm:h-12 flex-shrink-0">{platforms[key].icon}</div>
+                <span className="text-xs sm:text-base whitespace-nowrap">{platforms[key].name}</span>
               </button>
             ))}
           </div>
-          <p className="text-center text-gray-600 mt-3 sm:mt-4 text-sm sm:text-base">{currentPlatform.description}</p>
+          <p className="text-center text-gray-600 mt-3 sm:mt-4 text-xs sm:text-base">{currentPlatform.description}</p>
         </div>
       </section>
 
