@@ -10,8 +10,9 @@ const mainNavLinks = [
   { href: '/doctors', label: 'Врачи' },
   { href: '/reviews', label: 'Отзывы' },
   { href: '/blog', label: 'Блог' },
-  { href: '/setup', label: 'Как подключиться' },
 ];
+
+const setupLink = { href: '/setup', label: 'Как подключиться' };
 
 const dropdownLinks = [
   { href: '/how-it-works', label: 'Как это работает' },
@@ -63,6 +64,14 @@ export default function Header() {
                   {link.label}
                 </Link>
               ))}
+
+              {/* Кнопка "Как подключиться" — выделена */}
+              <Link
+                href={setupLink.href}
+                className="ml-2 px-5 py-2.5 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-xl hover:from-orange-600 hover:to-orange-700 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5"
+              >
+                {setupLink.label}
+              </Link>
 
               {/* Выпадающее меню */}
               <div className="relative">
@@ -266,6 +275,16 @@ export default function Header() {
                   </Link>
                 ))}
               </div>
+
+              {/* Кнопка "Как подключиться" — выделена */}
+              <Link
+                href={setupLink.href}
+                onClick={() => setIsMenuOpen(false)}
+                className="w-full text-center px-4 py-3.5 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-xl hover:from-orange-600 hover:to-orange-700 transition-all shadow-md animate-fade-in-up"
+                style={{ animationDelay: `${mainNavLinks.length * 50}ms` }}
+              >
+                {setupLink.label}
+              </Link>
 
               {/* Разделитель */}
               <div className="border-t border-gray-200 my-2" />
