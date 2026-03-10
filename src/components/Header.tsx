@@ -68,7 +68,8 @@ export default function Header() {
               {/* Кнопка "Как подключиться" — выделена */}
               <Link
                 href={setupLink.href}
-                className="ml-2 px-5 py-2.5 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-xl hover:from-orange-600 hover:to-orange-700 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5"
+                className="ml-2 px-5 py-2.5 bg-primary text-white font-semibold rounded-xl hover:bg-primary-dark hover:shadow-md transition-all duration-200"
+                style={{ color: '#FFFFFF' }}
               >
                 {setupLink.label}
               </Link>
@@ -280,7 +281,7 @@ export default function Header() {
               <Link
                 href={setupLink.href}
                 onClick={() => setIsMenuOpen(false)}
-                className="w-full text-center px-4 py-3.5 bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold rounded-xl hover:from-orange-600 hover:to-orange-700 transition-all shadow-md animate-fade-in-up"
+                className="w-full text-center px-4 py-3.5 bg-primary text-white font-semibold rounded-xl hover:bg-primary-dark transition-all shadow-md animate-fade-in-up"
                 style={{ animationDelay: `${mainNavLinks.length * 50}ms` }}
               >
                 {setupLink.label}
