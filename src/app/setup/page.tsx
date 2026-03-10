@@ -148,14 +148,14 @@ export default function SetupGuidePage() {
               <button
                 key={key}
                 onClick={() => setActivePlatform(key)}
-                className={`px-2 py-2 sm:px-6 sm:py-4 rounded-xl sm:rounded-2xl font-semibold transition-all duration-300 flex items-center gap-1.5 sm:gap-3 flex-shrink-0 ${
+                className={`px-2.5 py-2 sm:px-6 sm:py-4 rounded-xl sm:rounded-2xl font-semibold transition-all duration-300 flex items-center justify-center gap-1.5 sm:gap-3 flex-shrink-0 ${
                   activePlatform === key
                     ? `bg-gradient-to-r ${platforms[key].color} text-white shadow-lg scale-105`
                     : `${platforms[key].bgColor} text-gray-800 ${platforms[key].hoverColor}`
                 }`}
               >
-                <div className="w-7 h-7 sm:w-12 sm:h-12 flex-shrink-0">{platforms[key].icon}</div>
-                <span className="text-xs sm:text-base whitespace-nowrap">{platforms[key].name}</span>
+                <div className="w-7 h-7 sm:w-12 sm:h-12 flex-shrink-0 flex items-center justify-center">{platforms[key].icon}</div>
+                <span className="text-xs sm:text-base whitespace-nowrap leading-tight">{platforms[key].name}</span>
               </button>
             ))}
           </div>
