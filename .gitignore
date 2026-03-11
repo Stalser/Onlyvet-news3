@@ -52,3 +52,5 @@ next-env.d.ts
 *.download
 mcp-config.json
 \"# Deploy trigger\"  
+.vercel
+.env*.local

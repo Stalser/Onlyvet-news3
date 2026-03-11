@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import FadeIn from '@/components/FadeIn';
 import Carousel from '@/components/Carousel';
 
@@ -90,13 +91,33 @@ const sourceLabels: Record<ReviewSource, string> = {
   'flamp': 'Flamp',
 };
 
-const sourceIcons: Record<ReviewSource, string> = {
-  'все': '📍',
-  'yandex': '🔴',
-  '2gis': '🟢',
-  'google': '🔵',
-  'site': '🟣',
-  'flamp': '🟠',
+const sourceColors: Record<ReviewSource, string> = {
+  'все': '#6B7280',
+  'yandex': '#FC3F18',
+  '2gis': '#00A85E',
+  'google': '#4285F4',
+  'site': '#2C5F72',
+  'flamp': '#FF6B00',
+};
+
+const SourceIcon = ({ source, className = "w-4 h-4" }: { source: ReviewSource; className?: string }) => {
+  if (source === 'все') {
+    return (
+      <svg className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
+        <path d="M12 6v6l4 2" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+      </svg>
+    );
+  }
+  return (
+    <Image
+      src={`/images/${source}.svg`}
+      alt={sourceLabels[source]}
+      width={16}
+      height={16}
+      className={className}
+    />
+  );
 };
 
 const truncateText = (text: string, maxLength: number = 120) => {
@@ -223,13 +244,15 @@ export default function ReviewsPage() {
                   <button
                     key={source}
                     onClick={() => setSelectedSource(source)}
-                    className={`px-4 py-2.5 rounded-xl text-sm font-semibold transition-all ${
+                    className={`px-4 py-2.5 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 ${
                       selectedSource === source
-                        ? 'bg-primary text-white shadow-md'
+                        ? 'text-white shadow-md'
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
+                    style={selectedSource === source ? { backgroundColor: sourceColors[source] } : {}}
                   >
-                    {sourceIcons[source]} {sourceLabels[source]}
+                    <SourceIcon source={source} />
+                    <span>{sourceLabels[source]}</span>
                   </button>
                 ))}
               </div>
@@ -297,7 +320,8 @@ export default function ReviewsPage() {
                         ))}
                       </div>
                       <span className="text-xs text-gray-500 flex items-center justify-end gap-1">
-                        {sourceIcons[review.source]} {sourceLabels[review.source]}
+                        <SourceIcon source={review.source} />
+                        <span>{sourceLabels[review.source]}</span>
                       </span>
                     </div>
                   </div>
@@ -414,8 +438,9 @@ export default function ReviewsPage() {
                   </div>
                 </div>
                 <div className="ml-auto text-right">
-                  <span className="text-sm text-gray-500 flex items-center gap-1">
-                    {sourceIcons[selectedReview.source]} {sourceLabels[selectedReview.source]}
+                  <span className="text-sm flex items-center gap-1" style={{ color: sourceColors[selectedReview.source] }}>
+                    <SourceIcon source={selectedReview.source} />
+                    <span className="font-medium">{sourceLabels[selectedReview.source]}</span>
                   </span>
                   <p className="text-xs text-gray-400 mt-1">
                     {new Date(selectedReview.date).toLocaleDateString('ru-RU', {
