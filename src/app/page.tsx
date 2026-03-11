@@ -355,7 +355,7 @@ export default function Home() {
                 className="group block p-8 bg-white rounded-2xl border-2 border-gray-100 hover:border-blue-200 hover:shadow-xl transition-all duration-300 text-center"
               >
                 <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-blue-500 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Image src="/images/free-icon-vk-3670055.svg" alt="VK" width={32} height={32} loading="lazy" decoding="async" />
+                  <Image src="/images/svg/vk-logo.svg" alt="VK" width={32} height={32} loading="lazy" decoding="async" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">ВКонтакте</h3>
                 <p className="text-gray-600 text-sm">Новости и разборы анализов.</p>
@@ -371,7 +371,7 @@ export default function Home() {
                 className="group block p-8 bg-white rounded-2xl border-2 border-gray-100 hover:border-sky-200 hover:shadow-xl transition-all duration-300 text-center"
               >
                 <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-sky-500 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Image src="/images/free-icon-telegram-2111646.svg" alt="Telegram" width={32} height={32} loading="lazy" decoding="async" />
+                  <Image src="/images/svg/telegram-logo.svg" alt="Telegram" width={32} height={32} loading="lazy" decoding="async" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Telegram</h3>
                 <p className="text-gray-600 text-sm">Разборы сложных случаев и ответы на вопросы.</p>
@@ -387,7 +387,7 @@ export default function Home() {
                 className="group block p-8 bg-white rounded-2xl border-2 border-gray-100 hover:border-purple-200 hover:shadow-xl transition-all duration-300 text-center"
               >
                 <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-tr from-yellow-500 via-red-500 to-purple-500 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Image src="/images/free-icon-instagram-3955024.svg" alt="Instagram" width={32} height={32} loading="lazy" decoding="async" />
+                  <Image src="/images/svg/instagram-sign-logo.svg" alt="Instagram" width={32} height={32} loading="lazy" decoding="async" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Instagram*</h3>
                 <p className="text-gray-600 text-sm">Истории пациентов и визуальные схемы.</p>
@@ -403,7 +403,7 @@ export default function Home() {
                 className="group block p-8 bg-white rounded-2xl border-2 border-gray-100 hover:border-orange-200 hover:shadow-xl transition-all duration-300 text-center"
               >
                 <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-orange-500 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Image src="/images/free-icon-odnoklassniki-3670250.svg" alt="OK" width={32} height={32} loading="lazy" decoding="async" />
+                  <Image src="/images/svg/ok-sign-logo.svg" alt="OK" width={32} height={32} loading="lazy" decoding="async" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Одноклассники</h3>
                 <p className="text-gray-600 text-sm">Полезные советы и материалы.</p>
