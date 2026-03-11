@@ -220,54 +220,55 @@ export default function ReviewsPage() {
       </section>
 
       {/* Фильтры */}
-      <section className="py-8 bg-white border-b border-gray-200 sticky top-20 z-40 shadow-sm">
+      <section className="py-4 bg-white border-b border-gray-200 sticky top-16 md:top-20 z-40 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="space-y-4">
-            <div className="flex flex-col lg:flex-row gap-4">
-              {/* Источник */}
-              <div className="flex flex-wrap gap-2">
+          <div className="space-y-3">
+            {/* Кнопки фильтров - горизонтальный скролл на мобильном */}
+            <div className="flex overflow-x-auto pb-2 -mx-4 px-4 md:mx-0 md:px-0 md:flex-wrap md:pb-0 scrollbar-hide">
+              <div className="flex gap-2 md:flex-wrap">
                 {(Object.keys(sourceLabels) as ReviewSource[]).map((source) => (
                   <button
                     key={source}
                     onClick={() => setSelectedSource(source)}
-                    className={`px-4 py-2.5 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 ${
+                    className={`px-3 py-2 md:px-4 md:py-2.5 rounded-xl text-sm font-semibold transition-all flex items-center gap-2 flex-shrink-0 ${
                       selectedSource === source
                         ? 'text-white shadow-md'
                         : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                     }`}
                     style={selectedSource === source ? { backgroundColor: sourceColors[source] } : {}}
                   >
-                    <SourceIcon source={source} />
-                    <span>{sourceLabels[source]}</span>
+                    <SourceIcon source={source} className="w-4 h-4 md:w-5 md:h-5" />
+                    <span className="hidden sm:inline">{sourceLabels[source]}</span>
                   </button>
                 ))}
               </div>
+            </div>
 
-              {/* Сортировка и кнопка */}
-              <div className="flex items-center gap-4 ml-auto">
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value as 'newest' | 'oldest')}
-                  className="px-4 py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent text-sm font-semibold bg-white"
-                >
-                  <option value="newest">Сначала новые</option>
-                  <option value="oldest">Сначала старые</option>
-                </select>
-                <button
-                  onClick={() => setIsModalOpen(true)}
-                  className="px-6 py-2.5 bg-primary text-white rounded-xl hover:bg-primary-dark transition-all font-semibold"
-                  style={{ color: '#FFFFFF' }}
-                >
-                  Написать отзыв
-                </button>
-              </div>
+            {/* Сортировка и кнопка */}
+            <div className="flex items-center gap-3">
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value as 'newest' | 'oldest')}
+                className="flex-1 px-3 py-2 md:px-4 md:py-2.5 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent text-xs md:text-sm font-semibold bg-white"
+              >
+                <option value="newest">Сначала новые</option>
+                <option value="oldest">Сначала старые</option>
+              </select>
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="px-4 py-2 md:px-6 md:py-2.5 bg-primary text-white rounded-xl hover:bg-primary-dark transition-all font-semibold text-xs md:text-sm whitespace-nowrap"
+                style={{ color: '#FFFFFF' }}
+              >
+                <span className="hidden md:inline">Написать отзыв</span>
+                <span className="md:hidden">✍️</span>
+              </button>
             </div>
 
             {/* Результат */}
-            <div className="text-sm text-gray-500">
-              Найдено отзывов: <span className="font-semibold text-gray-900">{filteredReviews.length}</span>
+            <div className="text-xs md:text-sm text-gray-500">
+              Найдено: <span className="font-semibold text-gray-900">{filteredReviews.length}</span>
               {selectedSource !== 'все' && (
-                <span className="ml-2">из <span className="font-semibold">{reviews.length}</span></span>
+                <span className="md:ml-1">из <span className="font-semibold">{reviews.length}</span></span>
               )}
             </div>
           </div>
