@@ -387,8 +387,8 @@ export default function BookingPage() {
                 >
                   <div>
                     <div className="flex items-center gap-3 mb-3">
-                      <div className="w-12 h-12 rounded-full bg-sky-500 flex items-center justify-center">
-                        <Image src="/images/svg/telegram-logo.svg" alt="Telegram" width={24} height={24} />
+                      <div className="w-12 h-12 rounded-full flex items-center justify-center">
+                        <Image src="/images/svg/telegram-logo.svg" alt="Telegram" width={24} height={24} className="w-8 h-8" />
                       </div>
                       <div className="text-lg font-bold text-gray-900">Через Telegram</div>
                     </div>

@@ -56,14 +56,14 @@ export default function Footer() {
 
             {/* Соцсети */}
             <div className="flex gap-3 mt-6">
-              <a href="https://vk.com/onlyvet_clinic" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                <Image src="/images/svg/vk-logo.svg" alt="VK" width={20} height={20} />
+              <a href="https://vk.com/onlyvet_clinic" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full flex items-center justify-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                <Image src="/images/svg/vk-logo.svg" alt="VK" width={20} height={20} className="w-6 h-6" />
               </a>
-              <a href="https://t.me/onlyvet_clinic" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-sky-500 flex items-center justify-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                <Image src="/images/svg/telegram-logo.svg" alt="Telegram" width={20} height={20} />
+              <a href="https://t.me/onlyvet_clinic" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full flex items-center justify-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                <Image src="/images/svg/telegram-logo.svg" alt="Telegram" width={20} height={20} className="w-6 h-6" />
               </a>
-              <a href="https://ok.ru/onlyvet" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                <Image src="/images/svg/ok-sign-logo.svg" alt="OK" width={20} height={20} />
+              <a href="https://ok.ru/onlyvet" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full flex items-center justify-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                <Image src="/images/svg/ok-sign-logo.svg" alt="OK" width={20} height={20} className="w-6 h-6" />
               </a>
             </div>
           </div>
