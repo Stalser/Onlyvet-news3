@@ -2,7 +2,6 @@
 
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import FadeIn from '@/components/FadeIn';
 import Carousel from '@/components/Carousel';
 
@@ -110,12 +109,11 @@ const SourceIcon = ({ source, className = "w-4 h-4" }: { source: ReviewSource; c
     );
   }
   return (
-    <Image
+    <img
       src={`/images/${source}.svg`}
       alt={sourceLabels[source]}
-      width={16}
-      height={16}
       className={className}
+      style={{ objectFit: 'contain' }}
     />
   );
 };
