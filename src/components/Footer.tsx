@@ -45,11 +45,11 @@ export default function Footer() {
             {/* Контакты */}
             <div className="space-y-2">
               <a href={`mailto:${process.env.NEXT_PUBLIC_EMAIL || 'consult@onlyvet.ru'}`} className="flex items-center gap-2 text-sm text-gray-600 hover:text-primary transition-colors">
-                <span className="w-5 h-5 rounded-full bg-primary-light flex items-center justify-center text-xs">✉</span>
+                <Image src="/images/svg/email-icon.svg" alt="Email" width={20} height={20} className="w-5 h-5" />
                 {process.env.NEXT_PUBLIC_EMAIL || 'consult@onlyvet.ru'}
               </a>
               <a href={`tel:${process.env.NEXT_PUBLIC_PHONE_TEL || '+79000000000'}`} className="flex items-center gap-2 text-sm text-gray-600 hover:text-primary transition-colors">
-                <span className="w-5 h-5 rounded-full bg-primary-light flex items-center justify-center text-xs">📞</span>
+                <Image src="/images/svg/phone-icon.svg" alt="Phone" width={20} height={20} className="w-5 h-5" />
                 {process.env.NEXT_PUBLIC_PHONE_DISPLAY || '+7 900 000-00-00'}
               </a>
             </div>
