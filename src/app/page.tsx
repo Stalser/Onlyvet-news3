@@ -355,7 +355,7 @@ export default function Home() {
                 className="group block p-8 bg-white rounded-2xl border-2 border-gray-100 hover:border-blue-200 hover:shadow-xl transition-all duration-300 text-center"
               >
                 <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Image src="/images/svg/vk-logo.svg" alt="VK" width={64} height={64} loading="lazy" decoding="async" className="w-12 h-12" />
+                  <Image src="/images/svg/vk-logo2.svg" alt="VK" width={64} height={64} loading="lazy" decoding="async" className="w-14 h-14" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">ВКонтакте</h3>
                 <p className="text-gray-600 text-sm">Новости и разборы анализов.</p>
@@ -371,7 +371,7 @@ export default function Home() {
                 className="group block p-8 bg-white rounded-2xl border-2 border-gray-100 hover:border-sky-200 hover:shadow-xl transition-all duration-300 text-center"
               >
                 <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Image src="/images/svg/telegram-logo.svg" alt="Telegram" width={64} height={64} loading="lazy" decoding="async" className="w-12 h-12" />
+                  <Image src="/images/svg/telegram-logo2.svg" alt="Telegram" width={64} height={64} loading="lazy" decoding="async" className="w-14 h-14" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Telegram</h3>
                 <p className="text-gray-600 text-sm">Разборы сложных случаев и ответы на вопросы.</p>
@@ -387,7 +387,7 @@ export default function Home() {
                 className="group block p-8 bg-white rounded-2xl border-2 border-gray-100 hover:border-purple-200 hover:shadow-xl transition-all duration-300 text-center"
               >
                 <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Image src="/images/svg/instagram-sign-logo.svg" alt="Instagram" width={64} height={64} loading="lazy" decoding="async" className="w-12 h-12" />
+                  <Image src="/images/svg/instagram-sign-logo2.svg" alt="Instagram" width={64} height={64} loading="lazy" decoding="async" className="w-14 h-14" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Instagram*</h3>
                 <p className="text-gray-600 text-sm">Истории пациентов и визуальные схемы.</p>
@@ -403,7 +403,7 @@ export default function Home() {
                 className="group block p-8 bg-white rounded-2xl border-2 border-gray-100 hover:border-orange-200 hover:shadow-xl transition-all duration-300 text-center"
               >
                 <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Image src="/images/svg/ok-sign-logo.svg" alt="OK" width={64} height={64} loading="lazy" decoding="async" className="w-12 h-12" />
+                  <Image src="/images/svg/ok-sign-logo2.svg" alt="OK" width={64} height={64} loading="lazy" decoding="async" className="w-14 h-14" />
                 </div>
                 <h3 className="text-lg font-semibold text-gray-900 mb-2">Одноклассники</h3>
                 <p className="text-gray-600 text-sm">Полезные советы и материалы.</p>
