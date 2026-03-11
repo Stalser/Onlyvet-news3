@@ -109,17 +109,9 @@ const SourceIcon = ({ source, className = "w-4 h-4" }: { source: ReviewSource; c
       </svg>
     );
   }
-  const iconMap: Record<ReviewSource, string> = {
-    'все': '',
-    'yandex': 'yandex-v2',
-    '2gis': '2gis-v2',
-    'google': 'google-v2',
-    'site': 'site',
-    'flamp': 'flamp-v2',
-  };
   return (
     <Image
-      src={`/images/${iconMap[source]}.svg`}
+      src={`/images/${source}.svg`}
       alt={sourceLabels[source]}
       width={16}
       height={16}
