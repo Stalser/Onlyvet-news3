@@ -246,24 +246,22 @@ export default function ReviewsPage() {
               </div>
 
               {/* Сортировка и кнопка - на мобильном по центру */}
-              <div className="flex items-center gap-3 ml-auto lg:ml-0 lg:justify-end">
-                <div className="flex items-center gap-3 w-full lg:w-auto justify-between lg:justify-end">
-                  <select
-                    value={sortBy}
-                    onChange={(e) => setSortBy(e.target.value as 'newest' | 'oldest')}
-                    className="px-3 py-2 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent text-xs font-semibold bg-white whitespace-nowrap"
-                  >
-                    <option value="newest">Сначала новые</option>
-                    <option value="oldest">Сначала старые</option>
-                  </select>
-                  <button
-                    onClick={() => setIsModalOpen(true)}
-                    className="flex-1 lg:flex-none px-5 py-2.5 bg-primary text-white rounded-xl hover:bg-primary-dark transition-all font-semibold text-sm whitespace-nowrap"
-                    style={{ color: '#FFFFFF' }}
-                  >
-                    Написать отзыв
-                  </button>
-                </div>
+              <div className="flex items-center gap-3 w-full lg:w-auto lg:ml-auto lg:justify-end justify-center">
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value as 'newest' | 'oldest')}
+                  className="px-3 py-2 rounded-xl border border-gray-300 focus:ring-2 focus:ring-primary focus:border-transparent text-xs font-semibold bg-white whitespace-nowrap"
+                >
+                  <option value="newest">Сначала новые</option>
+                  <option value="oldest">Сначала старые</option>
+                </select>
+                <button
+                  onClick={() => setIsModalOpen(true)}
+                  className="flex-1 lg:flex-none px-5 py-2.5 bg-primary text-white rounded-xl hover:bg-primary-dark transition-all font-semibold text-sm whitespace-nowrap"
+                  style={{ color: '#FFFFFF' }}
+                >
+                  Написать отзыв
+                </button>
               </div>
             </div>
 
