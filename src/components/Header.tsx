@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
-import { Icon } from '@iconify/react';
 import PhoneModal from '@/components/PhoneModal';
 
 const mainNavLinks = [
@@ -119,7 +118,9 @@ export default function Header() {
                 className="p-2 text-gray-600 hover:text-primary hover:bg-primary-light/50 rounded-lg transition-all duration-200"
                 aria-label="Поиск"
               >
-                <Icon icon="mdi:magnify" className="w-5 h-5" />
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
               </button>
             </nav>
 
@@ -130,7 +131,9 @@ export default function Header() {
                 className="inline-flex items-center justify-center w-12 h-12 bg-green-500 text-white rounded-xl hover:bg-green-600 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5"
                 title="Позвонить в регистратуру"
               >
-                <Icon icon="mdi:phone" className="w-5 h-5" />
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
               </button>
               <Link
                 href="/booking"
@@ -147,7 +150,13 @@ export default function Header() {
               className="lg:hidden p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-all"
               aria-label="Меню"
             >
-              <Icon icon={isMenuOpen ? "mdi:close" : "mdi:menu"} className="w-6 h-6" />
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {isMenuOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
             </button>
           </div>
 
@@ -177,7 +186,7 @@ export default function Header() {
                   }}
                   className="px-4 py-3 text-gray-500 hover:text-gray-700"
                 >
-                  <Icon icon="mdi:close" className="w-5 h-5" />
+                  ✕
                 </button>
               </form>
             </div>
@@ -212,7 +221,9 @@ export default function Header() {
                 className="p-2 text-gray-900 hover:bg-gray-100 rounded-lg transition-all"
                 aria-label="Закрыть меню"
               >
-                <Icon icon="mdi:close" className="w-6 h-6" />
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 18L18 6M6 6l12 12" />
+                </svg>
               </button>
             </div>
 
@@ -225,7 +236,9 @@ export default function Header() {
                 }}
                 className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-green-500 text-white rounded-xl hover:bg-green-600 transition-all font-medium shadow-md"
               >
-                <Icon icon="mdi:phone" className="w-5 h-5" />
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
                 Позвонить в регистратуру
               </button>
 
@@ -242,7 +255,9 @@ export default function Header() {
                   type="submit"
                   className="px-4 py-2.5 bg-primary text-white rounded-xl hover:bg-primary-dark transition-all"
                 >
-                  <Icon icon="mdi:magnify" className="w-5 h-5" />
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
                 </button>
               </form>
 

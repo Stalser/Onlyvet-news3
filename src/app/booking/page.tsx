@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
-import { Icon } from '@iconify/react';
 import FadeIn from '@/components/FadeIn';
 import { doctors } from '@/data/doctors';
 import { services } from '@/data/services';
@@ -293,11 +292,11 @@ export default function BookingPage() {
     const isPdf = file.type === 'application/pdf';
     const isImage = file.type.startsWith('image/');
 
-    if (isVideo) return <Icon icon="mdi:film" className="w-5 h-5" />;
-    if (isArchive) return <Icon icon="mdi:folder-zip" className="w-5 h-5" />;
-    if (isPdf) return <Icon icon="mdi:file-pdf" className="w-5 h-5" />;
-    if (isImage) return <Icon icon="mdi:image" className="w-5 h-5" />;
-    return <Icon icon="mdi:paperclip" className="w-5 h-5" />;
+    if (isVideo) return '🎬';
+    if (isArchive) return '📦';
+    if (isPdf) return '📄';
+    if (isImage) return '🖼️';
+    return '📎';
   };
 
   // Получение лимита размера для типа файла
@@ -367,9 +366,8 @@ export default function BookingPage() {
                       Заполните подробную форму — так мы сможем сразу оценить вашу ситуацию и подготовить рекомендации.
                     </p>
                     <div className="bg-emerald-100 rounded-2xl px-4 py-3">
-                      <p className="text-xs text-emerald-800 font-medium flex items-center gap-1">
-                        <Icon icon="mdi:check-circle" className="w-4 h-4" />
-                        Рекомендуется для сложных случаев
+                      <p className="text-xs text-emerald-800 font-medium">
+                        ✓ Рекомендуется для сложных случаев
                       </p>
                     </div>
                   </div>
@@ -398,9 +396,8 @@ export default function BookingPage() {
                       Напишите администратору в Telegram — удобно для быстрых вопросов и записи.
                     </p>
                     <div className="bg-sky-100 rounded-2xl px-4 py-3">
-                      <p className="text-xs text-sky-800 font-medium flex items-center gap-1">
-                        <Icon icon="mdi:send" className="w-4 h-4" />
-                        Быстрый ответ в мессенджере
+                      <p className="text-xs text-sky-800 font-medium">
+                        ✈ Быстрый ответ в мессенджере
                       </p>
                     </div>
                   </div>
@@ -721,23 +718,15 @@ export default function BookingPage() {
                     />
                     <label htmlFor="attachment-upload" className="cursor-pointer">
                       <div className="flex flex-col items-center">
-                        <Icon icon="mdi:paperclip" className="w-16 h-16 text-gray-400 mb-3" />
+                        <span className="text-5xl mb-3">📎</span>
                         <p className="text-gray-800 font-semibold mb-1">
                           Перетащите файлы сюда или нажмите для выбора
                         </p>
                         <div className="flex flex-wrap justify-center gap-2 mt-2">
-                          <span className="text-xs px-2 py-1 bg-white rounded border text-gray-600 flex items-center gap-1">
-                            <Icon icon="mdi:file-pdf" className="w-3 h-3" /> PDF
-                          </span>
-                          <span className="text-xs px-2 py-1 bg-white rounded border text-gray-600 flex items-center gap-1">
-                            <Icon icon="mdi:image" className="w-3 h-3" /> JPG, PNG
-                          </span>
-                          <span className="text-xs px-2 py-1 bg-white rounded border text-gray-600 flex items-center gap-1">
-                            <Icon icon="mdi:folder-zip" className="w-3 h-3" /> ZIP, RAR
-                          </span>
-                          <span className="text-xs px-2 py-1 bg-white rounded border text-gray-600 flex items-center gap-1">
-                            <Icon icon="mdi:film" className="w-3 h-3" /> MP4, MOV, AVI
-                          </span>
+                          <span className="text-xs px-2 py-1 bg-white rounded border text-gray-600">📄 PDF</span>
+                          <span className="text-xs px-2 py-1 bg-white rounded border text-gray-600">🖼️ JPG, PNG</span>
+                          <span className="text-xs px-2 py-1 bg-white rounded border text-gray-600">📦 ZIP, RAR</span>
+                          <span className="text-xs px-2 py-1 bg-white rounded border text-gray-600">🎬 MP4, MOV, AVI</span>
                         </div>
                         <p className="text-xs text-gray-500 mt-3">
                           Документы до 10MB • Видео до 50MB • Архивы до 100MB
