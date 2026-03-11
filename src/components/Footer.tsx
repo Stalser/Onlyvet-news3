@@ -57,13 +57,13 @@ export default function Footer() {
             {/* Соцсети */}
             <div className="flex gap-3 mt-6">
               <a href="https://vk.com/onlyvet_clinic" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                <Image src="/images/free-icon-vk-3670055.svg" alt="VK" width={20} height={20} />
+                <Image src="/images/vk.svg" alt="VK" width={20} height={20} />
               </a>
               <a href="https://t.me/onlyvet_clinic" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-sky-500 flex items-center justify-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                <Image src="/images/free-icon-telegram-2111646.svg" alt="Telegram" width={20} height={20} />
+                <Image src="/images/telegram.svg" alt="Telegram" width={20} height={20} />
               </a>
               <a href="https://ok.ru/onlyvet" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                <Image src="/images/free-icon-odnoklassniki-3670250.svg" alt="OK" width={20} height={20} />
+                <Image src="/images/ok.svg" alt="OK" width={20} height={20} />
               </a>
             </div>
           </div>
