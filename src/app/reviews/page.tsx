@@ -5,7 +5,7 @@ import Link from 'next/link';
 import FadeIn from '@/components/FadeIn';
 import Carousel from '@/components/Carousel';
 
-type ReviewSource = 'все' | 'yandex' | '2gis' | 'google' | 'site' | 'flamp';
+type ReviewSource = 'все' | 'yandex' | '2gis' | 'google' | 'site';
 
 type Review = {
   id: string;
@@ -69,16 +69,6 @@ const reviews: Review[] = [
     source: 'site',
     hasPhotos: false,
   },
-  {
-    id: 'rev5',
-    clientName: 'Дмитрий В.',
-    petName: 'Собака Бим',
-    rating: 5,
-    text: 'Отличный сервис! Сэкономили кучу времени на поездке в клинику. Врач внимательно выслушала, задала уточняющие вопросы, дала грамотные рекомендации. Собака теперь здорова!',
-    date: '2025-01-20',
-    source: 'flamp',
-    hasPhotos: true,
-  },
 ];
 
 const sourceLabels: Record<ReviewSource, string> = {
@@ -87,7 +77,6 @@ const sourceLabels: Record<ReviewSource, string> = {
   '2gis': '2ГИС',
   'google': 'Google',
   'site': 'Сайт',
-  'flamp': 'Flamp',
 };
 
 const sourceColors: Record<ReviewSource, string> = {
@@ -96,7 +85,6 @@ const sourceColors: Record<ReviewSource, string> = {
   '2gis': '#00A85E',
   'google': '#4285F4',
   'site': '#2C5F72',
-  'flamp': '#FF6B00',
 };
 
 const SourceIcon = ({ source, className = "w-4 h-4" }: { source: ReviewSource; className?: string }) => {
@@ -547,7 +535,6 @@ export default function ReviewsPage() {
                     <option value="yandex">Яндекс</option>
                     <option value="2gis">2ГИС</option>
                     <option value="google">Google</option>
-                    <option value="flamp">Flamp</option>
                   </select>
                 </div>
 
