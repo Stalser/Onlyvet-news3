@@ -149,46 +149,71 @@ export default function FAQPage() {
         </div>
       </section>
 
-      {/* Категории вопросов */}
-      <section className="py-8 bg-white border-b border-gray-200 sticky top-20 z-40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap gap-2 justify-center">
-            {faqCategories.map((category, index) => (
-              <button
-                key={category.name}
-                onClick={() => setActiveCategory(index)}
-                className={`px-4 py-2 rounded-lg font-medium text-sm transition-all ${
-                  activeCategory === index
-                    ? 'bg-primary text-white shadow-md'
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-              >
-                {category.icon} {category.name}
-              </button>
-            ))}
+      {/* Категории вопросов — компактные фильтры */}
+      <section className="py-3 bg-white border-b border-gray-200 sticky top-[80px] sm:top-[84px] z-40 shadow-sm">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
+          {/* Мобильная версия — горизонтальный скролл */}
+          <div className="sm:hidden">
+            <div className="overflow-x-auto overflow-y-hidden -mx-3 px-3 pb-1 scrollbar-hide">
+              <div className="flex gap-2 whitespace-nowrap">
+                {faqCategories.map((category, index) => (
+                  <button
+                    key={category.name}
+                    onClick={() => setActiveCategory(index)}
+                    className={`px-3 py-2 rounded-lg font-semibold text-xs transition-all flex-shrink-0 flex items-center gap-1.5 ${
+                      activeCategory === index
+                        ? 'bg-primary text-white shadow-sm'
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
+                  >
+                    <span className="text-sm">{category.icon}</span>
+                    <span className="max-w-[80px] truncate">{category.name.split(' ')[0]}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Десктопная версия (sm и выше) — полный вид */}
+          <div className="hidden sm:block">
+            <div className="flex flex-wrap gap-2 justify-center">
+              {faqCategories.map((category, index) => (
+                <button
+                  key={category.name}
+                  onClick={() => setActiveCategory(index)}
+                  className={`px-4 py-2.5 rounded-xl font-medium text-sm transition-all ${
+                    activeCategory === index
+                      ? 'bg-primary text-white shadow-md'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  }`}
+                >
+                  {category.icon} {category.name}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* Вопросы и ответы */}
-      <section className="py-16 lg:py-24 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="py-12 sm:py-16 lg:py-24 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-3 sm:px-4 lg:px-8">
           {faqCategories.map((category, catIndex) => (
             <div key={category.name} className={activeCategory === catIndex ? 'block' : 'hidden'}>
               <FadeIn>
-                <div className="space-y-4">
+                <div className="space-y-3 sm:space-y-4">
                   {category.questions.map((item, qIndex) => (
                     <div
                       key={qIndex}
-                      className="bg-white rounded-2xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300"
+                      className="bg-white rounded-xl sm:rounded-2xl border border-gray-200 overflow-hidden hover:shadow-lg transition-all duration-300"
                     >
                       <button
                         onClick={() => setOpenQuestion(openQuestion === qIndex ? null : qIndex)}
-                        className="w-full px-6 py-5 text-left flex items-center justify-between gap-4"
+                        className="w-full px-4 py-3 sm:px-6 sm:py-5 text-left flex items-center justify-between gap-3 sm:gap-4"
                       >
-                        <span className="font-semibold text-gray-900 text-lg">{item.q}</span>
+                        <span className="font-semibold text-gray-900 text-sm sm:text-lg">{item.q}</span>
                         <svg
-                          className={`w-6 h-6 text-primary transition-transform duration-300 ${
+                          className={`w-5 h-5 sm:w-6 sm:h-6 text-primary transition-transform duration-300 flex-shrink-0 ${
                             openQuestion === qIndex ? 'rotate-180' : ''
                           }`}
                           fill="none"
@@ -199,9 +224,9 @@ export default function FAQPage() {
                         </svg>
                       </button>
                       {openQuestion === qIndex && (
-                        <div className="px-6 pb-5">
-                          <div className="bg-primary-light/30 rounded-xl p-6">
-                            <p className="text-gray-700 leading-relaxed">{item.a}</p>
+                        <div className="px-4 pb-4 sm:px-6 sm:pb-5">
+                          <div className="bg-primary-light/30 rounded-lg sm:rounded-xl p-4 sm:p-6">
+                            <p className="text-gray-700 text-sm sm:text-base leading-relaxed">{item.a}</p>
                           </div>
                         </div>
                       )}
@@ -215,28 +240,28 @@ export default function FAQPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-16 lg:py-24 bg-primary-light">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="py-12 sm:py-16 lg:py-24 bg-primary-light">
+        <div className="max-w-3xl mx-auto px-3 sm:px-4 lg:px-8 text-center">
           <FadeIn>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-4 sm:mb-6">
               Остались вопросы?
             </h2>
-            <p className="text-lg text-gray-600 mb-8">
+            <p className="text-base sm:text-lg text-gray-600 mb-6 sm:mb-8">
               Напишите нам — мы ответим в течение 30 минут
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
               <a
                 href="https://t.me/onlyvet_clinic"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center px-8 py-4 bg-primary text-white font-semibold rounded-2xl hover:bg-primary-dark hover:shadow-lg transition-all duration-300 text-lg"
+                className="inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 bg-primary text-white font-semibold rounded-xl sm:rounded-2xl hover:bg-primary-dark hover:shadow-lg transition-all duration-300 text-sm sm:text-lg"
                 style={{ color: '#FFFFFF' }}
               >
                 Написать в Telegram
               </a>
               <a
                 href="mailto:consult@onlyvet.ru"
-                className="inline-flex items-center justify-center px-8 py-4 border-2 border-primary text-primary font-semibold rounded-2xl hover:bg-primary-light hover:shadow-lg transition-all duration-300 text-lg"
+                className="inline-flex items-center justify-center px-6 py-3 sm:px-8 sm:py-4 border-2 border-primary text-primary font-semibold rounded-xl sm:rounded-2xl hover:bg-primary-light hover:shadow-lg transition-all duration-300 text-sm sm:text-lg"
               >
                 Написать на email
               </a>
