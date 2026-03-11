@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { Icon } from '@iconify/react';
 
 const footerLinks = {
   services: [
@@ -45,11 +46,11 @@ export default function Footer() {
             {/* Контакты */}
             <div className="space-y-2">
               <a href={`mailto:${process.env.NEXT_PUBLIC_EMAIL || 'consult@onlyvet.ru'}`} className="flex items-center gap-2 text-sm text-gray-600 hover:text-primary transition-colors">
-                <span className="w-5 h-5 rounded-full bg-primary-light flex items-center justify-center text-xs">✉</span>
+                <Icon icon="mdi:email" className="w-5 h-5 text-primary" />
                 {process.env.NEXT_PUBLIC_EMAIL || 'consult@onlyvet.ru'}
               </a>
               <a href={`tel:${process.env.NEXT_PUBLIC_PHONE_TEL || '+79000000000'}`} className="flex items-center gap-2 text-sm text-gray-600 hover:text-primary transition-colors">
-                <span className="w-5 h-5 rounded-full bg-primary-light flex items-center justify-center text-xs">📞</span>
+                <Icon icon="mdi:phone" className="w-5 h-5 text-primary" />
                 {process.env.NEXT_PUBLIC_PHONE_DISPLAY || '+7 900 000-00-00'}
               </a>
             </div>
@@ -57,13 +58,13 @@ export default function Footer() {
             {/* Соцсети */}
             <div className="flex gap-3 mt-6">
               <a href="https://vk.com/onlyvet_clinic" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                <Image src="/images/free-icon-vk-3670055.svg" alt="VK" width={20} height={20} />
+                <Icon icon="mdi:vk" className="w-5 h-5 text-white" />
               </a>
               <a href="https://t.me/onlyvet_clinic" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-sky-500 flex items-center justify-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                <Image src="/images/free-icon-telegram-2111646.svg" alt="Telegram" width={20} height={20} />
+                <Icon icon="mdi:telegram" className="w-5 h-5 text-white" />
               </a>
               <a href="https://ok.ru/onlyvet" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                <Image src="/images/free-icon-odnoklassniki-3670250.svg" alt="OK" width={20} height={20} />
+                <Icon icon="mdi:odnoklassniki" className="w-5 h-5 text-white" />
               </a>
             </div>
           </div>
