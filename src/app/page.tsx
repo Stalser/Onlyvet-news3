@@ -333,7 +333,7 @@ export default function Home() {
       </section>
 
       {/* Мы в социальных сетях */}
-      <section className="py-16 lg:py-24 bg-white">
+      <section className="py-16 lg:py-24 bg-gradient-to-br from-primary-light/40 via-white to-secondary-light/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn>
             <div className="text-center mb-12">
@@ -352,12 +352,12 @@ export default function Home() {
                 href="https://vk.com/onlyvet_clinic"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group block p-8 bg-white rounded-2xl border-2 border-gray-100 hover:border-blue-200 hover:shadow-xl transition-all duration-300 text-center"
+                className="group block p-8 bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 text-center border border-blue-100 hover:border-blue-400 hover:-translate-y-2"
               >
-                <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform">
+                <div className="w-20 h-20 mx-auto mb-5 flex items-center justify-center bg-blue-50 rounded-2xl group-hover:scale-110 group-hover:bg-blue-100 transition-all duration-300">
                   <Image src="/images/svg/vk-logo2.svg" alt="VK" width={64} height={64} loading="lazy" decoding="async" className="w-14 h-14" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">ВКонтакте</h3>
+                <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">ВКонтакте</h3>
                 <p className="text-gray-600 text-sm">Новости и разборы анализов.</p>
               </a>
             </ScaleIn>
@@ -368,12 +368,12 @@ export default function Home() {
                 href="https://t.me/onlyvet_clinic"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group block p-8 bg-white rounded-2xl border-2 border-gray-100 hover:border-sky-200 hover:shadow-xl transition-all duration-300 text-center"
+                className="group block p-8 bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 text-center border border-sky-100 hover:border-sky-400 hover:-translate-y-2"
               >
-                <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform">
+                <div className="w-20 h-20 mx-auto mb-5 flex items-center justify-center bg-sky-50 rounded-2xl group-hover:scale-110 group-hover:bg-sky-100 transition-all duration-300">
                   <Image src="/images/svg/telegram-logo2.svg" alt="Telegram" width={64} height={64} loading="lazy" decoding="async" className="w-14 h-14" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Telegram</h3>
+                <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-sky-600 transition-colors">Telegram</h3>
                 <p className="text-gray-600 text-sm">Разборы сложных случаев и ответы на вопросы.</p>
               </a>
             </ScaleIn>
@@ -384,12 +384,12 @@ export default function Home() {
                 href="https://instagram.com/onlyvet_clinic"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group block p-8 bg-white rounded-2xl border-2 border-gray-100 hover:border-purple-200 hover:shadow-xl transition-all duration-300 text-center"
+                className="group block p-8 bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 text-center border border-purple-100 hover:border-purple-400 hover:-translate-y-2"
               >
-                <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform">
+                <div className="w-20 h-20 mx-auto mb-5 flex items-center justify-center bg-purple-50 rounded-2xl group-hover:scale-110 group-hover:bg-purple-100 transition-all duration-300">
                   <Image src="/images/svg/instagram-sign-logo2.svg" alt="Instagram" width={64} height={64} loading="lazy" decoding="async" className="w-14 h-14" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Instagram*</h3>
+                <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors">Instagram*</h3>
                 <p className="text-gray-600 text-sm">Истории пациентов и визуальные схемы.</p>
               </a>
             </ScaleIn>
@@ -400,12 +400,12 @@ export default function Home() {
                 href="https://ok.ru/onlyvet"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group block p-8 bg-white rounded-2xl border-2 border-gray-100 hover:border-orange-200 hover:shadow-xl transition-all duration-300 text-center"
+                className="group block p-8 bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 text-center border border-orange-100 hover:border-orange-400 hover:-translate-y-2"
               >
-                <div className="w-16 h-16 mx-auto mb-4 flex items-center justify-center group-hover:scale-110 transition-transform">
+                <div className="w-20 h-20 mx-auto mb-5 flex items-center justify-center bg-orange-50 rounded-2xl group-hover:scale-110 group-hover:bg-orange-100 transition-all duration-300">
                   <Image src="/images/svg/ok-sign-logo2.svg" alt="OK" width={64} height={64} loading="lazy" decoding="async" className="w-14 h-14" />
                 </div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Одноклассники</h3>
+                <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-orange-600 transition-colors">Одноклассники</h3>
                 <p className="text-gray-600 text-sm">Полезные советы и материалы.</p>
               </a>
             </ScaleIn>
