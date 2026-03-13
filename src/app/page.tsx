@@ -265,7 +265,7 @@ export default function Home() {
           </FadeIn>
           <Carousel itemsPerPage={3} autoPlay autoPlayInterval={7000}>
             {doctors.map((doctor) => (
-              <Link key={doctor.id} href={`/doctors/${doctor.id}`} className="block group">
+              <div key={doctor.id} className="px-3 sm:px-4">
                 <div className="bg-white rounded-2xl border border-gray-200 p-6 hover:border-primary-light hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 h-full flex flex-col">
                   
                   {/* Аватар и специализация */}
@@ -278,7 +278,7 @@ export default function Home() {
                       {/* Индикатор активности */}
                       <div className="absolute bottom-0 right-0 w-5 h-5 bg-green-500 border-2 border-white rounded-full" title="Доступен для консультаций"></div>
                     </div>
-                    
+
                     {/* Бейдж специализации */}
                     <span className={`px-3 py-1.5 rounded-full text-xs font-semibold ${
                       doctor.specialization === 'терапевт' ? 'bg-blue-100 text-blue-700' :
@@ -294,7 +294,7 @@ export default function Home() {
 
                   {/* Информация о враче */}
                   <div className="flex-1">
-                    <h3 className="text-lg font-bold text-gray-900 mb-1 group-hover:text-primary transition-colors">
+                    <h3 className="text-lg font-bold text-gray-900 mb-1 hover:text-primary transition-colors">
                       {doctor.name}
                     </h3>
                     <p className="text-sm text-gray-600 mb-3 font-medium line-clamp-2">
@@ -339,7 +339,7 @@ export default function Home() {
                         <div className="text-xs text-gray-500">Рейтинг</div>
                       </div>
                     </div>
-                    
+
                     {/* Опыт */}
                     <div className="flex items-center gap-2 text-xs text-gray-600 bg-gray-50 px-3 py-2 rounded-lg">
                       <span className="text-green-500">✓</span>
@@ -347,14 +347,24 @@ export default function Home() {
                     </div>
                   </div>
 
-                  {/* Кнопка */}
-                  <div className="mt-auto">
-                    <div className="w-full inline-flex items-center justify-center px-4 py-2.5 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm font-semibold shadow-md hover:shadow-lg group-hover:shadow-lg" style={{ color: '#FFFFFF' }}>
-                      Записаться на консультацию
-                    </div>
+                  {/* Кнопки */}
+                  <div className="flex gap-2 mt-auto">
+                    <Link
+                      href={`/booking?doctorId=${doctor.id}`}
+                      className="flex-1 inline-flex items-center justify-center px-3 py-2.5 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm font-semibold shadow-md hover:shadow-lg"
+                      style={{ color: '#FFFFFF' }}
+                    >
+                      Записаться
+                    </Link>
+                    <Link
+                      href={`/doctors/${doctor.id}`}
+                      className="px-3 py-2.5 border-2 border-primary text-primary rounded-lg hover:bg-primary-light transition-colors text-sm font-semibold"
+                    >
+                      Подробнее
+                    </Link>
                   </div>
                 </div>
-              </Link>
+              </div>
             ))}
           </Carousel>
           <FadeIn delay={600}>
