@@ -137,23 +137,38 @@ export default function Home() {
       </section>
 
       {/* Когда онлайн-консультация подходит */}
-      <section className="py-16 lg:py-24 bg-white">
+      <section className="py-12 lg:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn>
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <div className="text-center mb-8 lg:mb-12">
+              <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-3">
                 Когда подходит онлайн-консультация
               </h2>
-              <p className="text-lg text-gray-600">Онлайн-формат эффективен для многих неэкстренных ситуаций</p>
+              <p className="text-sm md:text-lg text-gray-600 px-4 md:px-0">Онлайн-формат эффективен для многих неэкстренных ситуаций</p>
             </div>
           </FadeIn>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          {/* Десктоп — 4 колонки */}
+          <div className="hidden lg:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {whenSuitable.map((item, index) => (
               <ScaleIn key={index} delay={index * 100}>
                 <div className="group p-6 bg-gray-50 rounded-2xl hover:bg-primary-light transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
                   <div className="text-4xl mb-4">{item.icon}</div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">{item.title}</h3>
                   <p className="text-gray-600 text-sm">{item.description}</p>
+                </div>
+              </ScaleIn>
+            ))}
+          </div>
+          
+          {/* Мобильные и планшеты — 2 колонки */}
+          <div className="lg:hidden grid grid-cols-2 gap-3">
+            {whenSuitable.map((item, index) => (
+              <ScaleIn key={index} delay={index * 100}>
+                <div className="group p-4 bg-gray-50 rounded-xl hover:bg-primary-light/50 transition-all duration-300">
+                  <div className="text-3xl mb-3">{item.icon}</div>
+                  <h3 className="text-sm font-semibold text-gray-900 mb-1.5 leading-tight">{item.title}</h3>
+                  <p className="text-gray-600 text-[11px] leading-snug">{item.description}</p>
                 </div>
               </ScaleIn>
             ))}
@@ -165,14 +180,16 @@ export default function Home() {
       <section className="py-12 lg:py-24 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn>
-            <div className="text-center mb-12">
-              <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">
+            <div className="text-center mb-8 lg:mb-12">
+              <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-3">
                 Как проходит консультация
               </h2>
-              <p className="text-base md:text-lg text-gray-600">Простой процесс из четырёх шагов</p>
+              <p className="text-sm md:text-lg text-gray-600 px-4 md:px-0">Простой процесс из четырёх шагов</p>
             </div>
           </FadeIn>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+          
+          {/* Десктоп — 4 колонки */}
+          <div className="hidden lg:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {consultationSteps.map((item, index) => (
               <ScaleIn key={index} delay={index * 100}>
                 <div className="relative">
@@ -185,26 +202,56 @@ export default function Home() {
               </ScaleIn>
             ))}
           </div>
+          
+          {/* Мобильные и планшеты — 2 колонки */}
+          <div className="lg:hidden grid grid-cols-2 gap-3">
+            {consultationSteps.map((item, index) => (
+              <ScaleIn key={index} delay={index * 100}>
+                <div className="relative">
+                  <div className="text-3xl font-bold text-primary mb-2">{item.step}</div>
+                  <div className="p-4 bg-white rounded-xl shadow-sm">
+                    <h3 className="text-sm font-semibold text-gray-900 mb-1.5 leading-tight">{item.title}</h3>
+                    <p className="text-gray-600 text-[11px] leading-snug">{item.description}</p>
+                  </div>
+                </div>
+              </ScaleIn>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* Безопасность */}
-      <section className="py-16 lg:py-24 bg-white">
+      <section className="py-12 lg:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn>
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <div className="text-center mb-8 lg:mb-12">
+              <h2 className="text-2xl md:text-4xl font-bold text-gray-900 mb-3">
                 Почему сервис безопасен
               </h2>
             </div>
           </FadeIn>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          {/* Десктоп — 4 колонки */}
+          <div className="hidden lg:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {safetyPoints.map((item, index) => (
               <ScaleIn key={index} delay={index * 100}>
                 <div className="p-6 bg-gray-50 rounded-2xl text-center hover:shadow-lg transition-all duration-300 hover:-translate-y-1">
                   <div className="text-4xl mb-4">{item.icon}</div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">{item.title}</h3>
                   <p className="text-gray-600 text-sm">{item.description}</p>
+                </div>
+              </ScaleIn>
+            ))}
+          </div>
+          
+          {/* Мобильные и планшеты — 2 колонки */}
+          <div className="lg:hidden grid grid-cols-2 gap-3">
+            {safetyPoints.map((item, index) => (
+              <ScaleIn key={index} delay={index * 100}>
+                <div className="p-4 bg-gray-50 rounded-xl text-center hover:bg-gray-100 transition-all duration-300">
+                  <div className="text-3xl mb-3">{item.icon}</div>
+                  <h3 className="text-sm font-semibold text-gray-900 mb-1.5 leading-tight">{item.title}</h3>
+                  <p className="text-gray-600 text-[11px] leading-snug">{item.description}</p>
                 </div>
               </ScaleIn>
             ))}
