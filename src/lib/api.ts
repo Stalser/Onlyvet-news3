@@ -1,10 +1,10 @@
 // API utilities для будущей работы с БД
 // Сейчас возвращает данные из файлов, потом можно переключить на API
 
-import { Doctor, Service, Review, ApiResponse } from './types';
-import { doctors as localDoctors } from './doctors';
-import { services as localServices } from './services';
-import { reviews as localReviews } from './reviews';
+import { Doctor, Service, Review, ApiResponse } from '../data/types';
+import { doctors as localDoctors } from '../data/doctors';
+import { services as localServices } from '../data/services';
+import { reviews as localReviews } from '../data/reviews';
 
 // Флаг для переключения между локальными данными и API
 const USE_API = false; // Когда будет готова БД — поставить true
