@@ -420,19 +420,21 @@ export default function Home() {
       </section>
 
       {/* Мы в социальных сетях */}
-      <section className="py-16 lg:py-24 bg-gradient-to-br from-primary-light/40 via-white to-secondary-light/20">
+      <section className="py-12 lg:py-16 bg-gradient-to-br from-primary-light/40 via-white to-secondary-light/20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn>
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <div className="text-center mb-8 lg:mb-12">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-3">
                 Мы в социальных сетях
               </h2>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              <p className="text-sm md:text-lg text-gray-600 max-w-2xl mx-auto px-4">
                 Подписывайтесь на OnlyVet — делимся историями пациентов, рекомендациями и полезными подсказками.
               </p>
             </div>
           </FadeIn>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
+          
+          {/* Десктоп — 4 колонки */}
+          <div className="hidden lg:grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 max-w-5xl mx-auto">
             {/* ВКонтакте */}
             <ScaleIn delay={0}>
               <a
@@ -497,8 +499,76 @@ export default function Home() {
               </a>
             </ScaleIn>
           </div>
+          
+          {/* Мобильные и планшеты — 2 колонки, компактные */}
+          <div className="lg:hidden grid grid-cols-2 gap-3 max-w-2xl mx-auto">
+            {/* ВКонтакте */}
+            <ScaleIn delay={0}>
+              <a
+                href="https://vk.com/onlyvet_clinic"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block p-4 bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 text-center border border-blue-100 hover:border-blue-400"
+              >
+                <div className="w-14 h-14 mx-auto mb-3 flex items-center justify-center bg-blue-50 rounded-xl group-hover:scale-105 group-hover:bg-blue-100 transition-all">
+                  <Image src="/images/svg/vk-logo2.svg" alt="VK" width={56} height={56} className="w-10 h-10" />
+                </div>
+                <h3 className="text-sm font-bold text-gray-900 mb-1">ВКонтакте</h3>
+                <p className="text-gray-500 text-[11px] leading-tight">Новости и разборы</p>
+              </a>
+            </ScaleIn>
+
+            {/* Telegram */}
+            <ScaleIn delay={100}>
+              <a
+                href="https://t.me/onlyvet_clinic"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block p-4 bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 text-center border border-sky-100 hover:border-sky-400"
+              >
+                <div className="w-14 h-14 mx-auto mb-3 flex items-center justify-center bg-sky-50 rounded-xl group-hover:scale-105 group-hover:bg-sky-100 transition-all">
+                  <Image src="/images/svg/telegram-logo2.svg" alt="Telegram" width={56} height={56} className="w-10 h-10" />
+                </div>
+                <h3 className="text-sm font-bold text-gray-900 mb-1">Telegram</h3>
+                <p className="text-gray-500 text-[11px] leading-tight">Разборы и ответы</p>
+              </a>
+            </ScaleIn>
+
+            {/* Instagram */}
+            <ScaleIn delay={200}>
+              <a
+                href="https://instagram.com/onlyvet_clinic"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block p-4 bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 text-center border border-purple-100 hover:border-purple-400"
+              >
+                <div className="w-14 h-14 mx-auto mb-3 flex items-center justify-center bg-purple-50 rounded-xl group-hover:scale-105 group-hover:bg-purple-100 transition-all">
+                  <Image src="/images/svg/instagram-sign-logo2.svg" alt="Instagram" width={56} height={56} className="w-10 h-10" />
+                </div>
+                <h3 className="text-sm font-bold text-gray-900 mb-1">Instagram*</h3>
+                <p className="text-gray-500 text-[11px] leading-tight">Истории и схемы</p>
+              </a>
+            </ScaleIn>
+
+            {/* Одноклассники */}
+            <ScaleIn delay={300}>
+              <a
+                href="https://ok.ru/onlyvet"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block p-4 bg-white rounded-xl shadow-sm hover:shadow-lg transition-all duration-300 text-center border border-orange-100 hover:border-orange-400"
+              >
+                <div className="w-14 h-14 mx-auto mb-3 flex items-center justify-center bg-orange-50 rounded-xl group-hover:scale-105 group-hover:bg-orange-100 transition-all">
+                  <Image src="/images/svg/ok-sign-logo2.svg" alt="OK" width={56} height={56} className="w-10 h-10" />
+                </div>
+                <h3 className="text-sm font-bold text-gray-900 mb-1">Одноклассники</h3>
+                <p className="text-gray-500 text-[11px] leading-tight">Советы и материалы</p>
+              </a>
+            </ScaleIn>
+          </div>
+          
           <FadeIn delay={400}>
-            <p className="text-xs text-gray-400 mt-8 text-center">
+            <p className="text-[10px] md:text-xs text-gray-400 mt-6 lg:mt-8 text-center px-4">
               * Instagram принадлежит компании Meta Platforms Inc., деятельность которой запрещена на территории РФ как экстремистская организация.
             </p>
           </FadeIn>
