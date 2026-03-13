@@ -221,13 +221,29 @@ export default function Home() {
               <p className="text-lg text-gray-600">Профессиональные ветеринарные консультации дистанционно</p>
             </div>
           </FadeIn>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {services.map((service, index) => (
+          
+          {/* Десктоп — сетка, Мобильные — карусель */}
+          <div className="hidden lg:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {services.slice(0, 8).map((service, index) => (
               <ScaleIn key={service.id} delay={index * 100}>
                 <ServiceCard service={service} />
               </ScaleIn>
             ))}
           </div>
+          
+          {/* Мобильные и планшеты — карусель */}
+          <div className="lg:hidden">
+            <Carousel itemsPerPage={1} autoPlay={true} autoPlayInterval={5000}>
+              {services.slice(0, 8).map((service, index) => (
+                <div key={service.id} className="px-4">
+                  <ScaleIn delay={index * 100}>
+                    <ServiceCard service={service} />
+                  </ScaleIn>
+                </div>
+              ))}
+            </Carousel>
+          </div>
+          
           <FadeIn delay={600}>
             <div className="text-center mt-12">
               <Link href="/services" className="text-primary hover:text-primary-dark font-medium">
