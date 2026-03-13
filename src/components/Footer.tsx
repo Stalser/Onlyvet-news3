@@ -63,43 +63,46 @@ export default function Footer() {
             </a>
           </div>
 
-          {/* Ссылки - 2 колонки */}
-          <div className="grid grid-cols-2 gap-4 mb-6">
+          {/* Ссылки - 3 колонки в один ряд */}
+          <div className="grid grid-cols-3 gap-3 mb-6">
+            {/* Услуги */}
             <div>
-              <h3 className="font-semibold text-gray-900 mb-3 text-sm">Услуги</h3>
-              <ul className="space-y-2">
+              <h3 className="font-semibold text-gray-900 mb-2 text-xs">Услуги</h3>
+              <ul className="space-y-1.5">
                 {footerLinks.services.slice(0, 3).map((link) => (
                   <li key={link.id}>
-                    <Link href={link.href} className="text-gray-600 hover:text-primary text-xs transition-colors">
+                    <Link href={link.href} className="text-gray-600 hover:text-primary text-[11px] transition-colors">
                       {link.label}
                     </Link>
                   </li>
                 ))}
               </ul>
             </div>
+            {/* Инфо */}
             <div>
-              <h3 className="font-semibold text-gray-900 mb-3 text-sm">Инфо</h3>
-              <ul className="space-y-2">
+              <h3 className="font-semibold text-gray-900 mb-2 text-xs">Инфо</h3>
+              <ul className="space-y-1.5">
                 {footerLinks.info.slice(0, 3).map((link) => (
                   <li key={link.id}>
-                    <Link href={link.href} className="text-gray-600 hover:text-primary text-xs transition-colors">
+                    <Link href={link.href} className="text-gray-600 hover:text-primary text-[11px] transition-colors">
                       {link.label}
                     </Link>
                   </li>
                 ))}
               </ul>
             </div>
-          </div>
-
-          {/* Документы - отдельно */}
-          <div className="mb-6">
-            <h3 className="font-semibold text-gray-900 mb-3 text-sm">Документы</h3>
-            <div className="flex flex-wrap gap-2">
-              {footerLinks.legal.map((link) => (
-                <Link key={link.id} href={link.href} className="text-xs text-gray-600 hover:text-primary px-2 py-1 bg-white rounded border border-gray-200 transition-colors">
-                  {link.label}
-                </Link>
-              ))}
+            {/* Документы */}
+            <div>
+              <h3 className="font-semibold text-gray-900 mb-2 text-xs">Документы</h3>
+              <ul className="space-y-1.5">
+                {footerLinks.legal.map((link) => (
+                  <li key={link.id}>
+                    <Link href={link.href} className="text-gray-600 hover:text-primary text-[11px] transition-colors">
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
 
