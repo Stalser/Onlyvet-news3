@@ -51,6 +51,11 @@ next-env.d.ts
 *.dmg
 *.download
 mcp-config.json
-\"# Deploy trigger\"  
+\"# Deploy trigger\"
 .vercel
 .env*.local
+
+# Local only (not for GitHub)
+backend/
+pocketbase/
+pocketbase.zip
