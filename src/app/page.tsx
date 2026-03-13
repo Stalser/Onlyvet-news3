@@ -239,7 +239,7 @@ export default function Home() {
       </section>
 
       {/* Врачи */}
-      <section className="py-16 lg:py-24 bg-white">
+      <section className="py-16 lg:py-24 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn>
             <div className="text-center mb-12">
@@ -250,30 +250,91 @@ export default function Home() {
           <Carousel itemsPerPage={3} autoPlay autoPlayInterval={7000}>
             {doctors.map((doctor) => (
               <Link key={doctor.id} href={`/doctors/${doctor.id}`} className="block group">
-                <div className="bg-white rounded-3xl border border-gray-200 overflow-hidden hover:border-primary-light hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 h-full">
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary transition-colors">
+                <div className="bg-white rounded-2xl border border-gray-200 p-6 hover:border-primary-light hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 h-full flex flex-col">
+                  
+                  {/* Аватар и специализация */}
+                  <div className="flex items-start justify-between mb-4">
+                    {/* Круглый аватар */}
+                    <div className="relative">
+                      <div className="w-20 h-20 rounded-full bg-gradient-to-br from-primary to-primary-light flex items-center justify-center ring-4 ring-primary-light/20 group-hover:ring-primary-light/40 transition-all">
+                        <span className="text-2xl font-bold text-white">{doctor.initials}</span>
+                      </div>
+                      {/* Индикатор активности */}
+                      <div className="absolute bottom-0 right-0 w-5 h-5 bg-green-500 border-2 border-white rounded-full" title="Доступен для консультаций"></div>
+                    </div>
+                    
+                    {/* Бейдж специализации */}
+                    <span className={`px-3 py-1.5 rounded-full text-xs font-semibold ${
+                      doctor.specialization === 'терапевт' ? 'bg-blue-100 text-blue-700' :
+                      doctor.specialization === 'диагност' ? 'bg-purple-100 text-purple-700' :
+                      doctor.specialization === 'хирург' ? 'bg-red-100 text-red-700' :
+                      doctor.specialization === 'дерматолог' ? 'bg-orange-100 text-orange-700' :
+                      doctor.specialization === 'кардиолог' ? 'bg-pink-100 text-pink-700' :
+                      'bg-gray-100 text-gray-700'
+                    }`}>
+                      {doctor.specialization.charAt(0).toUpperCase() + doctor.specialization.slice(1)}
+                    </span>
+                  </div>
+
+                  {/* Информация о враче */}
+                  <div className="flex-1">
+                    <h3 className="text-lg font-bold text-gray-900 mb-1 group-hover:text-primary transition-colors">
                       {doctor.name}
                     </h3>
-                    <p className="text-sm text-gray-600 mb-4 font-medium">
+                    <p className="text-sm text-gray-600 mb-3 font-medium line-clamp-2">
                       {doctor.role}
                     </p>
-                    <p className="text-gray-600 text-sm mb-4 leading-relaxed">
+                    <p className="text-gray-600 text-sm mb-4 leading-relaxed line-clamp-3">
                       {doctor.servicesShort}
                     </p>
+
+                    {/* Теги */}
                     <div className="flex flex-wrap gap-1.5 mb-4">
-                      {doctor.tags.map((tag) => (
+                      {doctor.tags.slice(0, 3).map((tag) => (
                         <span
                           key={tag}
-                          className="text-xs px-2 py-0.5 rounded bg-primary-light text-primary font-medium whitespace-nowrap"
+                          className="text-xs px-2 py-1 rounded-md bg-gray-100 text-gray-700 font-medium"
                         >
                           {tag}
                         </span>
                       ))}
                     </div>
-                    <div className="flex items-center gap-2 text-sm text-gray-600">
+                  </div>
+
+                  {/* Разделитель */}
+                  <div className="border-t border-gray-100 my-4"></div>
+
+                  {/* Статистика и опыт */}
+                  <div className="space-y-3 mb-4">
+                    {/* Статистика */}
+                    <div className="flex items-center justify-between text-center">
+                      <div className="flex-1">
+                        <div className="text-lg font-bold text-primary">{doctor.patientsCount}</div>
+                        <div className="text-xs text-gray-500">Пациентов</div>
+                      </div>
+                      <div className="w-px h-8 bg-gray-200"></div>
+                      <div className="flex-1">
+                        <div className="text-lg font-bold text-primary">{doctor.reviewsCount}</div>
+                        <div className="text-xs text-gray-500">Отзывов</div>
+                      </div>
+                      <div className="w-px h-8 bg-gray-200"></div>
+                      <div className="flex-1">
+                        <div className="text-lg font-bold text-primary">5.0</div>
+                        <div className="text-xs text-gray-500">Рейтинг</div>
+                      </div>
+                    </div>
+                    
+                    {/* Опыт */}
+                    <div className="flex items-center gap-2 text-xs text-gray-600 bg-gray-50 px-3 py-2 rounded-lg">
                       <span className="text-green-500">✓</span>
                       <span className="font-medium">{doctor.experienceLabel}</span>
+                    </div>
+                  </div>
+
+                  {/* Кнопка */}
+                  <div className="mt-auto">
+                    <div className="w-full inline-flex items-center justify-center px-4 py-2.5 bg-primary text-white rounded-lg hover:bg-primary-dark transition-colors text-sm font-semibold shadow-md hover:shadow-lg group-hover:shadow-lg" style={{ color: '#FFFFFF' }}>
+                      Записаться на консультацию
                     </div>
                   </div>
                 </div>
